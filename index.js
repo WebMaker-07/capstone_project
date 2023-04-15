@@ -11,10 +11,17 @@ env.config({
 
 app.set('view engine', 'hbs');
 // priority to call first
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.urlencoded(
+    {
+        extended: true
+    }));
 
+
+//define the routes
+app.use('/', require('./routes/admin_routes'));
+// app.use('/auth',require('./routes/auth'));
 //creating a connection in database
+app.use(express.json())
 const mydb = mysql.createConnection(
     {
         host: process.env.DATABASE_HOST,

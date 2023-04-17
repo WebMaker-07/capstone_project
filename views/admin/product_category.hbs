@@ -145,8 +145,24 @@
             </nav>
             {{!-- Main Content --}}
             <div class="main-content container">
-               
-                
+                <div class="container mt-5">
+                        {{#if message}}
+                        <h4 class="alert alert-success mt-4">
+                            <strong>{{message}}</strong>
+                        </h4>
+                        {{/if}}
+                    <div class="row justify-content-baseline">
+                        <div class="col-md-5">
+                        <form method="post" action="/product_category">
+                            <div class="form-group">
+                            <label for="category_name">Category Name:</label>
+                            <input type="text" class="form-control" id="category_name" name="category_name">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

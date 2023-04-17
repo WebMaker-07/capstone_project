@@ -1,0 +1,28 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500;600&family=EB+Garamond:ital,wght@0,500;1,600&family=Josefin+Sans:wght@400;700&display=swap');
+
+
+body{
+    background-color: #94AF9F;
+}
+.logo{
+    width: 50%;
+}
+.login-section{
+    background: #AEC2B6;
+    width: 75vw;
+    margin-top: 100px;
+    border-radius:100px;
+    margin-left: 100px;
+}
+.right-img{
+    width:45vh;
+}
+.right-side{
+    background: aliceblue;
+    border-radius:100px 0px 0px 100px;
+    
+}
+*{
+    font-family: 'Alkatra', cursive;
+}

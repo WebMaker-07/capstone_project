@@ -22,25 +22,6 @@ app.use('/', require('./routes/admin_routes'));
 app.use('/auth',require('./routes/auth'));
 //creating a connection in database
 app.use(express.json())
-// const mydb = mysql.createConnection(
-//     {
-//         host: process.env.DATABASE_HOST,
-//         user: process.env.DATABASE_USER,
-//         password: process.env.DATABASE_PASSWORD,
-//         database: process.env.DATABASE,
-//         port: process.env.DATABSE_PORT
-//     }
-// );
 app.listen(port,()=>{
     console.log(`Server has started ${port}`);// testing the port
-    //Condition to test if succesfully connected in databse
-    // mydb.connect((error)=>{
-    //     if (error){
-    //         console.log('Error occured:' + error);
-    //     }else{
-    //         console.log('Database Connected Sucessfully')
-    //     }
-        
-    // })
-
 })

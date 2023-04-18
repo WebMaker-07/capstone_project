@@ -9,18 +9,23 @@ const db = mysql.createConnection(
     });
 
 exports.viewCustomer = (req,res)=>{
-    console.log('HELLO!');
-    res.send('Hello');
-    // db.query('SELECT * from customers',
-    //     (error,result)=>
-    //         {
-    //             if(error)
-    //                 {
-    //                     console.log("Error Message : " + error);
-    //                 }
-    //             else if(result)
-    //                 {
-    //                     console.log(result);
-    //                 }
-    //         });
+
+    db.query('SELECT * from customers',
+        (error,result)=>
+            {
+                if(error)
+                    {
+                        console.log("Error Message : " + error);
+                    }
+                else if(result)
+                    {
+                        console.log(result);
+                        res.render('admin/customers',
+                            {
+                                title: "List of customers",
+                                data: result
+                            });
+                    }
+            });
 }
+

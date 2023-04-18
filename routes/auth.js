@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const admin_controller = require('../controller/auth_account');
+const product_cat = require('../controller/auth_product_category');
 
-router.post('/customers', (req, res) => {
-  console.log('viewCustomer is called');
-  admin_controller.viewCustomer(req, res);
-});
+router.get('/customers',admin_controller.viewCustomer);
+router.get('/product_category',product_cat.viewProductCat);
 
 module.exports = router;

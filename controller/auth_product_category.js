@@ -22,5 +22,3 @@ const db = mysql.createConnection(
                     res.status(200).send(rows);
                     });
     }
-
-module.exports = router;

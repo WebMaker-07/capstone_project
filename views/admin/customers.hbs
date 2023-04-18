@@ -147,7 +147,12 @@
             <div class="main-content container">
                <div class="row">
                     <div class="col-4">
-                        <form action="" class="form">
+                        {{#if message}}
+                            <h6 class="alert alert-success">
+                                {{message}}
+                            </h6>
+                        {{/if}}
+                        <form action="/auth/addCustomer" class="form" method="post">
                             <label for="first_name">First Name : </label>
                             <input type="text" name="first_name" id="first_name" class="form-control">
                             <label for="last_name">Last Name : </label>
@@ -156,7 +161,7 @@
                             <input type="text" name="contact" id="contact" class="form-control">
                             <label for="address">Address : </label>
                             <input type="text" name="address" id="address" class="form-control"><br>
-                            <a href="" type="submit" class="btn btn-primary">Add</a>
+                            <button type="submit" class="btn btn-primary">Add</button>
                             <a href="" class="btn btn-info">Update</a>
                         </form>
                     </div>

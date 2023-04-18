@@ -18,12 +18,48 @@ exports.viewCustomer = (req,res)=>{
                     }
                 else if(result)
                     {
-                        console.log(result);
                         res.render('admin/customers',
                             {
                                 title: "List of customers",
-                                data: result
+                                data: result,
+                                message: "Add Customer"
                             });
                     }
             });
+}
+exports.addCustomer = (req,res)=>{
+    let {first_name, last_name, contact, address} = req.body;
+    db.query('INSERT INTO customers set ?',
+        {
+            first_name: first_name,
+            last_name: last_name,
+            contact: contact,
+            address: address
+        },
+        (err,result)=>
+            {
+                if(err)
+                    {
+                        console.log('Error Message: '+err);
+                    }
+                else
+                    {
+                        db.query('SELECT * FROM cusomers',(err,data)=>
+                            {
+                                if(err)
+                                    {
+                                        console.log('Error Message: '+err);
+                                    }
+                                else
+                                    {
+                                        res.render('customers',
+                                            {
+                                                title: "List of customers",
+                                                data: data,
+                                                message: "Customer added successfully!"
+                                            })
+                                    }
+                            })
+                    }
+            })
 }

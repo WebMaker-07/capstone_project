@@ -9,6 +9,7 @@ const db = mysql.createConnection(
     });
 
 exports.viewCustomer = (req,res)=>{
+
     db.query('SELECT * from customers',
         (error,result)=>
             {

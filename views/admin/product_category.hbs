@@ -161,15 +161,26 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                         </div>
+                        {{!-- {{#if data}} --}}
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Description</th>
-                                    
+                                    <th>Category Name</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {{#each data}}
+                                <tr>
+                                    <td>{{this.category_name}}</td>
+                                    <td><a href="/auth/updateForm/{{this.category_id}}" class="btn btn-success">Edit </a> 
+                                        <a href="/auth/deleteUser/{{this.category_id}}" class="btn btn-danger" onclick="btnDelete()" > Archive</a></td>
+
+                                </tr>
+                                {{/each}}
+                            </tbody>
                         </table>
+                        {{!-- {{/if}} --}}
                     </div>
                     
                 </div>

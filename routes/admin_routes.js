@@ -21,7 +21,7 @@ router.get('/customers',(request,response)=>{
 router.get('/product-list',(request,response)=>{
     response.render('admin/product_list');
 })
-router.get('/product_categories',(request,response)=>{
+router.get('/product-categories',(request,response)=>{
     response.render('admin/product_category');
 })
 

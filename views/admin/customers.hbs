@@ -23,39 +23,45 @@
             </div>
             <ul class="list-unstyled components">
                 <li >
-                    <a href="/dasboard">
+                    <a href="/dashboard">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard
                     </a>
                 </li>
                 <li >
-                    <a href="/customers">
+                    <a class="active" href="/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
                 </li>
-                <li>
+                    <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/product-list">
-                                <i class="bi bi-graph-down-arrow"></i>
+                            <a  href="/product-list">
+                            <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
                             <a href="/product-categories">
-                                <i class="bi bi-graph-up-arrow"></i>
+                               <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
-                     
+                          <li>
+                            
+                            <a href="/product-stock-in">
+                               <i class="fas fa-box-open"></i>
+                                Stock In
+                            </a>
+                        </li>
                     </ul>
                 </li>
        
@@ -145,61 +151,39 @@
             </nav>
             {{!-- Main Content --}}
             <div class="main-content container">
-               <div class="row">
-                    <div class="col-4">
-                        {{#if message}}
-                            <h6 class="alert alert-success">
-                                {{message}}
-                            </h6>
-                        {{/if}}
-                        <form action="/auth/addCustomer" class="form" method="post">
-                            <label for="customer_id">Customer ID : </label>
-                            <input type="text" name="customer_id" id="customer_id" class="form-control" value="{{cus.customer_id}}" readonly>
-                            <label for="first_name">First Name : </label>
-                            <input type="text" name="first_name" id="first_name" class="form-control" value="{{cus.first_name}}"  required>
-                            <label for="last_name">Last Name : </label>
-                            <input type="text" name="last_name" id="last_name" class="form-control" value="{{cus.last_name}}"  required>
-                            <label for="contact">Contact : </label>
-                            <input type="text" name="contact" id="contact" class="form-control" value="{{cus.contact}}"  required>
-                            <label for="address">Address : </label>
-                            <input type="text" name="address" id="address" class="form-control" value="{{cus.address}}" required><br>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                            <a href="/auth/updateCustomer" class="btn btn-info">Update</a>
+               <div class="px-5">
+                    <div class="d-flex">
+                      <h3>List of Customers</h3>
+                         <form class="ml-auto" role="search">
+                            <div class="input-group">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                             </div>
                         </form>
-                    </div>
-                    <div class="col-8">
-                        {{#if title}}
-                            <h6 class="alert alert-success">
-                                {{title}}
-                            </h6>
-                        {{/if}}
-                        {{#if data}}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Contact</th>
-                                    <th>Address</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each data}}
-                                <tr>
-                                    <td>{{this.first_name}}</td>
-                                    <td>{{this.last_name}}</td>
-                                    <td>{{this.contact}}</td>
-                                    <td>{{this.address}}</td>
-                                    <td><a href="/auth/update/{{this.customer_id}}" class="btn btn-success">Edit </a> 
-                                        <a href="/auth/deleteUser/{{this.account_id}}" class="btn btn-danger" onclick="btnDelete()" > Archive</a></td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
-                        {{/if}}
-                    </div>
-                    
+                    </div>  
+                    <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/customer_add" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
+
+                    <table class="table table-success table-striped table-bordered">
+                        <thead>
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Proffer Lhastly Faner</td>
+                                <td>Oriental Mindoro</td>
+                                <td>0912-234-5678</td>
+                                <td>
+                                    <a a href="/customer_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                     <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                </div>
                 
             </div>
@@ -213,14 +197,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    {{!-- <script type="text/javascript">
+   <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
         });
         
-            const username = sessionStorage.getItem("username");
+          
+    </script> 
+    {{!-- <script>
+         const username = sessionStorage.getItem("username");
             alert(username);
 
             // Insert the username into the welcome message

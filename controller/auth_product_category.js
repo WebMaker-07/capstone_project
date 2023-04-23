@@ -11,7 +11,7 @@ const db = mysql.createConnection(
 
 
     exports.viewProductCat = (req,res) =>{
-        db.query('SELECT category_name from products_category',
+        db.query('SELECT * from products_category',
         (error,result)=>
         {
             if(error)

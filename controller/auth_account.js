@@ -27,6 +27,7 @@ exports.viewCustomer = (req,res)=>{
                                 data: result
                             });
                     }
+                    console.log(result)
             });
 }
 

@@ -34,31 +34,36 @@
                         Customers
                     </a>
                 </li>
-                <li>
+                   <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/product-list">
-                                <i class="bi bi-graph-down-arrow"></i>
+                            <a  href="/product-list">
+                            <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
-                                <i class="bi bi-graph-up-arrow"></i>
+                            <a class="active" href="/product-categories">
+                               <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
-                     
+                          <li>
+                            
+                            <a href="/product-stock-in">
+                               <i class="fas fa-box-open"></i>
+                                Stock In
+                            </a>
+                        </li>
                     </ul>
                 </li>
-       
                
                 <li > 
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -102,14 +107,14 @@
             </ul>
         </nav>
         <div id="content" class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                
                 <div class="container">
                     <button class="btn btn-info d-lg-none" type="button" id="sidebarCollapse">
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Products Category</a></h3>
+                    <h3 class="location px-5 pt-2"> <a href="">Products Category</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -145,7 +150,48 @@
             </nav>
             {{!-- Main Content --}}
             <div class="main-content container">
-               
+                <div class="px-5">
+                    <div class="d-flex">
+                      <h3>Product Categories</h3>
+                         <form class="ml-auto" role="search">
+                            <div class="input-group">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                             </div>
+                        </form>
+                    </div>  
+                    <form class="mb-3 w-50" role="search">
+                            <div class="input-group">
+                                <input class="form-control me-2" type="text" placeholder="Product Category" >
+                                 <button class="btn btn-warning text-dark" type="submit">Add <i class="bi bi-plus-square-fill"></i></button>
+                             </div>
+                        </form>
+                   
+
+                    <div class="table-responsive ">
+                        <table class="table table-success table-striped table-bordered  ">
+                                                <thead>
+                                                    <th>#</th>
+                                                    <th scope="col">Product Category</th>
+                                                    <th scope="col">Date Added</th>
+                                                    <th scope="col">Action</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td >1</td>
+                                                        <td>Sports</td>
+                                                        
+                                                        <td>April 25, 2023</td>
+                                                        <td>
+                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                    </div>
+                    
+               </div>
                 
             </div>
         </div>
@@ -158,14 +204,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    {{!-- <script type="text/javascript">
+   <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
         });
         
-            const username = sessionStorage.getItem("username");
+          
+    </script> 
+    {{!-- <script>
+         const username = sessionStorage.getItem("username");
             alert(username);
 
             // Insert the username into the welcome message

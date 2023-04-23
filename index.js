@@ -17,7 +17,7 @@ app.use(express.urlencoded(
         extended: true
     }));
 
- app.use(express.static('public'));
+app.use(express.static('public'));
 //define the routes
 app.use('/', require('./routes/admin_routes'));
 // app.use('/auth',require('./routes/auth'));

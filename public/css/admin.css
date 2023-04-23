@@ -59,10 +59,11 @@ span {
     align-items: stretch;
 }
 
+
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #94AF9F;
+    background: #000000;
     color: #fff;
     transition: all 0.3s;
    
@@ -115,7 +116,7 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #94AF9F;
+    background: rgb(0, 0, 0);
 }
 
 #sidebar .sidebar-header strong {
@@ -141,7 +142,10 @@ span {
     background: #fff;
 }
 
-
+.active {
+    color: #000000;
+    background: #fff;
+}
 #sidebar ul li a i {
     margin-right: 10px;
 }
@@ -149,7 +153,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #94AF9F;
+    background: #050505;
 }
 
 
@@ -168,19 +172,19 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #94AF9F;
+    background: rgb(0, 0, 0);
 }
 
 
 
 a.download {
     background: #fff;
-    color: #94AF9F;
+    color: #000000;
 }
 
 a.article,
 a.article:hover {
-    background: #94AF9F !important;
+    background: rgb(0, 0, 0) !important;
     color: #fff !important;
 }
 
@@ -198,44 +202,44 @@ a.article:hover {
    DASHBOARD 
 ----------------------------------------------------- */
 .main-content .boxes{
-    background: rgba(189, 199, 176 ,.6);
+    
+   
     border-radius: 10px;
     padding: 20px 20px 0px 20px;
-    margin-left: 10px;
-    margin-right: 5px;
-    box-shadow: 2px 5px 5px 5px #676867;
-    margin: 10px 10px 10px 10px;
-
-}
-.rectransac{
-  
-    border-radius: 10px;
-    background-color:rgba(189, 199, 176 ,.6);
-    box-shadow: 2px 5px 10px 10px #676867;
-    padding: 10px 0px 10px 10px;
-    margin-left: 20px;
-    
-}
-.unpaidtransac, .cancelledtransac  {
-    border-radius: 10px;
-    background-color:rgba(153, 173, 137, 0.6);
-    box-shadow: 2px 5px 5px 5px #676867;
-    padding: 10px 10px 10px 10px;
-
-    font-size: 16px;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+    /* box-shadow: 2px 5px 5px 5px #676867; */
+    margin: 10px 5px 10px 0px;
     
 
 }
+.orangeBox{
+    background: rgb(240, 210, 190);
+    border: 2px solid rgb(231, 183, 151);
+}
+.greenBox{
+    background: rgba(190, 240, 203);
+    border:2px solid rgb(151, 231, 151);
+}
 
-.unpaidtransac{
-    margin-left: 60px;
+.redBox{
+    background: rgb(240, 192, 190);
+    border:2px solid rgb(231, 151, 151);
 }
-.unpaidhistory {
-    border-radius: 10px;
-    background-color:rgba(153, 173, 137, .6);
-    box-shadow: 2px 5px 5px 5px #676867;
-    margin-left: 60px;
+.violetBox{
+    background: rgb(230, 190, 240);
+    border:2px solid rgb(228, 151, 231);
 }
+.blueBox{
+    background: rgb(190, 234, 240);
+    border:2px solid rgb(151, 195, 231);
+}
+.yellowBox{
+    background: rgb(225, 240, 190);
+    border:2px solid rgb(231, 230, 151);
+}
+
+
 
 
 
@@ -243,7 +247,7 @@ a.article:hover {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     #sidebar {
         min-width: 80px;
         max-width: 80px;

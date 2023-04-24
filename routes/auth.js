@@ -9,6 +9,8 @@ router.post('/add_customer',admin_controller.add_customer);
 
 router.get('/customer_update/:customer_id', admin_controller.update_form);
 
+router.get('/product-categories',product_cat.viewProductCat);
+
 router.post('/update_customer', admin_controller.update_customer);
 
 router.get('/customer_delete/:customer_id', admin_controller.customer_delete);

@@ -20,11 +20,15 @@ exports.view_customer = (req,res)=>{
                     }
                 else if(result)
                     {
+                        console.log(result);
                         res.render('admin/customers',
                             {
-                                data: output
+                                title: "List of customers",
+                                data: result,
+                                message: "Add Customer"
                             });
                     }
+                    console.log(result)
             });
 }
 
@@ -113,37 +117,4 @@ exports.update_customer = (req,res)=>{
                             });
                     }
             })
-}
-
-exports.customer_delete = (req,res)=>{
-    const id = req.params.customer_id;
-    db.query('DELETE FROM customers where customer_id = ?', [id],
-        (error,data)=>
-            {
-                if(error)
-                    {
-                        console.log("Error Message : " +error)
-                    }
-                else
-                    {
-                        db.query('CALL customer_list()',
-                        (error,result)=>
-                            {
-                                output = result[0];
-                                if(error)
-                                    {
-                                        console.log("Error Message : " + error);
-                                    }
-                                else if(result)
-                                    {
-                                        res.render('admin/customers',
-                                            {
-                                                data: output,
-                                                title: "Customer successfully deleted!"
-                                            });
-                                    }
-                            });
-                    }
-            });
-            
 }

@@ -24,5 +24,5 @@ app.use('/auth',require('./routes/auth'));
 //creating a connection in database
 app.use(express.json())
 app.listen(port,()=>{
-    console.log(`Server has started ${port}`);// testing the port
+    console.log(`Server has started https://localhost:${port}`);// testing the port
 })

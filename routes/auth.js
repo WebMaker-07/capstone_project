@@ -13,6 +13,9 @@ router.get('/customer_delete/:customer_id', admin_controller.customer_delete);
 //PRODUCT CATEGORY
 router.get('/product-categories',product_cat.viewProductCat);
 router.post('/add_category',product_cat.addProductcat);
-router.get('/delete_category/:category_id', product_cat.deleteProductCat);
+router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
+router.get('/auth/updateProductCat/:category_id', product_cat.updateProductCat);
+router.post('/auth/updateProductCat/:category_id', product_cat.updateProductCatSubmit);
+
 
 module.exports = router;

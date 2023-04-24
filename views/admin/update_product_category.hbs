@@ -29,28 +29,28 @@
                     </a>
                 </li>
                 <li >
-                    <a class="active" href="/auth/customers">
+                    <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
                 </li>
-                     <li>
+                   <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/auth/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/auth/product-categories">
+                            <a class="active" href="/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
@@ -64,7 +64,6 @@
                         </li>
                     </ul>
                 </li>
-       
                
                 <li > 
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -108,14 +107,14 @@
             </ul>
         </nav>
         <div id="content" class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                
                 <div class="container">
                     <button class="btn btn-info d-lg-none" type="button" id="sidebarCollapse">
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Customers / Update Information </a></h3>
+                    <h3 class="location px-5 pt-2"> <a href="">Products Category</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -151,39 +150,58 @@
             </nav>
             {{!-- Main Content --}}
             <div class="main-content container">
-               <div class="px-5  ">
-                <form action="/auth/update_customer" method="post" class="px-4 pe-4 pt-3 pb-3 border border-5 border-success">
-                    <h4>Update Customer Details</h4>
-                    <div class="row">
-                        <input type="hidden" name="customer_id" id="customer_id" value="{{data.customer_id}}">
-                       <div class="col">
-                         <label for="" class="form-label">First Name</label>
-                         <input type="text" name="first_name" id="first_name" class="form-control" value="{{data.first_name}}" >
-                       </div>
-                       <div class="col">
-                         <label for="" class="form-label">Last Name</label>
-                         <input type="text" name="last_name" id="last_name" class="form-control" value="{{data.last_name}}" >
-                       </div>
-                    </div>
-                      <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label">Contact</label>
-                            <input type="text" name="contact" id="contact" class="form-control" value="{{data.contact}}" >
+
+                <div class="px-5">
+                    <div class="d-flex">
+                    <h3>Product Categories</h3>
+                    <form class="ml-auto" role="search">
+                        <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                         </div>
-                        <div class="col">
-                            <label for="" class="form-label">Address</label>
-                            <input type="text" name="address" id="address" class="form-control" value="{{data.address}}" >
-                        </div>
-                        
+                    </form>
+                    </div>  
+                    <form class="mb-3 w-50" role="search" action="/auth/updateProductCat/{{data.category_id}}" method="POST">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="text" name="category_name" value="{{data.category_name}}" placeholder="Product Category" >
+                        {{#if message}}
+                            <h4 class="alert {{color}}">
+                                {{message}}
+                            </h4>
+                        {{/if}}
+                        <button class="btn btn-warning text-dark" type="submit">Update <i class="bi bi-plus-square-fill"></i></button>
                     </div>
-                      <div class="mt-3">
-                            <button type="submit"class="btn btn-success ">Update</button>
-                             <a href="/customers" class="btn btn-danger ">Cancel</a>
-                      </div>
-                </form>
-               </div>
-                
-            </div>
+                    </form>
+
+                    <div class="table-responsive ">
+                    <table class="table table-success table-striped table-bordered">
+                        <thead>
+                        <th>#</th>
+                        <th scope="col">Product Category</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Action</th>
+                        </thead>
+                        <tbody>
+                        {{#each data}}
+                            <tr>
+                            <td>{{this.category_id}}</td>
+                            <td>{{this.category_name}}</td>
+                            <td>{{this.date_created}}</td>
+                            <td>
+                                <a href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                <a href="/auth/deleteProductCat/{{this.category_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                    <i class="bi bi-trash"></i></i> Delete</a>
+                            </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    </div>
+
+                </div>
+
+                </div>
+
         </div>
     </div>
     <script src="js/index.js"></script>
@@ -201,6 +219,9 @@
             });
         });
         
+
+
+
           
     </script> 
     {{!-- <script>

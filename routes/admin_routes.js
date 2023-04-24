@@ -44,6 +44,12 @@ router.get('/dashboard',(request,response)=>{
     router.post('/product-categories',(request,response)=>{
         response.render('admin/product_category');
     })
+    router.get('/auth/updateProductCat/:category_id',(request,response)=>{
+        response.render('admin/update_product_category');
+    })
+    router.post('/auth/updateProductCat/:category_id',(request,response)=>{
+        response.render('admin/update_product_category');
+    })
 
 
 module.exports = router;

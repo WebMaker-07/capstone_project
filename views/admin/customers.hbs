@@ -162,7 +162,11 @@
                         </form>
                     </div>  
                     <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/customer_add" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
-
+                    {{#if message}}
+                        <h4 class="alert {{color}}">
+                            {{message}}
+                        </h4>
+                    {{/if}}
                     <table class="table table-success table-striped table-bordered">
                         <thead>
                             <th>Customer ID</th>

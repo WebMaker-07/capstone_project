@@ -22,49 +22,61 @@ const db = mysql.createConnection(
             {
                 res.render('admin/product_category',
                 {
-                    // title: "List of Product_Category",
                     data: result,
-                    message: "Add Product"
                 });
             }
             
-            console.log(result)
         });
     }
+
+    exports.addProductcat = (req,res) =>{
+        let {category_name} = req.body;
+        db.query('INSERT INTO products_category(category_name) VALUES(?)', 
+            category_name
+        , (err, result) => {
+            if (err) {
+                console.log('Error Message: ' + err);
+            } else {
+                db.query('SELECT * FROM products_category', (err, data) => {
+                    if (err) {
+                        console.log('Error Message: ' + err);
+                    } else {
+                        res.render('admin/product_category', {
+                            title: "List of category",
+                            data: data,
+                            message: "Product Category added successfully!"
+                        })
+                        
+                    }
+                })
+            }
+        })
+
+    }
+
+    exports.deleteProductCat = (req, res) => {
+        const categoryId = req.params.category_id;
+        db.query("DELETE FROM products_category WHERE category_id = ?", categoryId, (err, result) => {
+          if (err) {
+            console.log("Error Message: " + err);
+          } else {
+            db.query('SELECT * FROM products_category', (err, delData) => {
+              if (err) {
+                console.log('Error Message: ' + err);
+              } else {
+                res.render('admin/product_category', {
+                  title: "List of Product_Category",
+                  data: delData,
+                  message: "Product Category deleted successfully!"
+                });
+              }
+            });
+          }
+        });
+      };
+      
     
 
-    exports.addCategory = (req,res)=>{
-        let category_name = req.body;
-        db.query('INSERT INTO products_category set ?',
-            {
-                category_name: category_name,
 
-            },
-            (err,result)=>
-                {
-                    if(err)
-                        {
-                            console.log('Error Message: '+err);
-                        }
-                    else
-                        {
-                            db.query('SELECT * FROM products_category',(err,data)=>
-                                {
-                                    if(err)
-                                        {
-                                            console.log('Error Message: '+err);
-                                        }
-                                    else
-                                        {
-                                            res.render('category_product',
-                                                {
-                                                    title: "List of category",
-                                                    data: data,
-                                                    message: "Product Category added successfully!"
-                                                })
-                                        }
-                                })
-                        }
-                })
-    }
+
     

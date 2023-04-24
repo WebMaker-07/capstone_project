@@ -20,6 +20,7 @@ app.use(express.static('public'));
 //define the routes
 app.use('/', require('./routes/admin_routes'));
 app.use('/auth',require('./routes/auth'));
+
 //creating a connection in database
 app.use(express.json())
 app.listen(port,()=>{

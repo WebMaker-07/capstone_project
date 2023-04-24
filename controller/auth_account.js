@@ -8,6 +8,28 @@ const db = mysql.createConnection(
         port:process.env.DATABASE_PORT
     });
 
+
+    exports.viewProductCat = (req,res) =>{
+        db.query('SELECT * from products_category',
+        (error,result)=>
+        {
+            console.log(result)
+            if(error)
+            {
+                console.log("Error Message : " + error);
+            }
+            else
+            {
+                res.render('admin/product_category',
+                {
+                    // title: "List of Product_Category",
+                    data: result,
+                    message: "Add Product"
+                });
+            }
+            
+        });
+    }
 // for displaying customer
 exports.viewCustomer = (req,res)=>{
 

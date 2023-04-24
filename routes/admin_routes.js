@@ -37,7 +37,11 @@ router.get('/dashboard',(request,response)=>{
     router.get('/product_update',(request,response)=>{
         response.render('admin/product_update');
     })
+    //PRODUCT CATEGORY
     router.get('/product-categories',(request,response)=>{
+        response.render('admin/product_category');
+    })
+    router.post('/product-categories',(request,response)=>{
         response.render('admin/product_category');
     })
 

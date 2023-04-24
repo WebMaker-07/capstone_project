@@ -14,7 +14,6 @@ exports.view_customer = (req,res)=>{
         (error,result)=>
             {
                 output = result[0];
-                console.log(output);
                 if(error)
                     {
                         console.log("Error Message : " + error);
@@ -32,6 +31,18 @@ exports.view_customer = (req,res)=>{
 // for adding customer
 exports.add_customer = (req,res)=>{
     let {first_name, last_name, contact, address} = req.body;
+    function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+    first_name = valid(first_name);
+    last_name = valid(last_name);
+    contact = contact.trim();
+    address = address.trim();
+
     db.query('INSERT INTO customers set ?',
         {
             first_name: first_name,
@@ -84,7 +95,19 @@ exports.update_form = (req,res)=>{
 }
 
 exports.update_customer = (req,res)=>{
-    const {first_name, last_name, contact, address, customer_id} = req.body;
+    let {first_name, last_name, contact, address, customer_id} = req.body;
+    function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+    first_name = valid(first_name);
+    last_name = valid(last_name);
+    contact = contact.trim();
+    address = address.trim();
+
     db.query('UPDATE customers SET first_name = ?, last_name = ?, contact = ? , address = ? where customer_id = ?',
         [first_name,last_name,contact,address,customer_id],
         (err,result)=>
@@ -115,7 +138,7 @@ exports.update_customer = (req,res)=>{
                                     }
                             });
                     }
-            })
+            });
 }
 
 //for deleting customer

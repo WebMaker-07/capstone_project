@@ -3,14 +3,14 @@ const router = express.Router();
 const admin_controller = require('../controller/auth_account');
 const product_cat = require('../controller/auth_product_category');
 
-router.get('/customers',admin_controller.viewCustomer);
+router.get('/customers',admin_controller.view_customer);
 
-router.post('/addCustomer', admin_controller.addCustomer);
+router.post('/add_customer',admin_controller.add_customer);
 
-router.get('/product_categories',product_cat.viewProductCat);
+router.get('/customer_update/:customer_id', admin_controller.update_form);
 
-router.get('/update/:customer_id', admin_controller.update);
+router.post('/update_customer', admin_controller.update_customer);
 
-router.post('/updateCustomer', admin_controller.updateCustomer);
+router.get('/customer_delete/:customer_id', admin_controller.customer_delete);
 
 module.exports = router;

@@ -133,3 +133,9 @@ exports.updateCustomer = (req,res)=>{
                     }
             })
 }
+
+
+// exports.searchProduct =(req, res)=>{
+//     const {search} = req.body;
+//     db.query("SELECT * FROM products WHERE ")
+// }

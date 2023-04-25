@@ -249,8 +249,8 @@ a.article:hover {
 
 @media only screen and (max-width: 768px) {
     #sidebar {
-        min-width: 80px;
-        max-width: 80px;
+        min-width: 120px;
+        max-width: 120px;
         text-align: center;
         margin-left: -80px !important;
     }
@@ -274,6 +274,9 @@ a.article:hover {
     }
     #sidebar ul li a {
         padding: 20px 10px;
+    }
+    #sidebar ul li a strong {
+        display: none;
     }
     #sidebar ul li a span {
         font-size: 0.85em;

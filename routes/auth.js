@@ -13,4 +13,5 @@ router.get('/update/:customer_id', admin_controller.update);
 
 router.post('/updateCustomer', admin_controller.updateCustomer);
 
+// router.post('/search_product', admin_controller.searchProduct);
 module.exports = router;

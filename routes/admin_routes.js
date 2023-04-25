@@ -40,6 +40,12 @@ router.get('/dashboard',(request,response)=>{
     router.get('/product-categories',(request,response)=>{
         response.render('admin/product_category');
     })
+    router.get('/product-stock-in',(request,response)=>{
+        response.render('admin/stock_in');
+    })
+    router.get('/add_stock',(request,response)=>{
+        response.render('admin/stock_in_add');
+    })
 
 
 module.exports = router;

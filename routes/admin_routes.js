@@ -37,14 +37,18 @@ router.get('/dashboard',(request,response)=>{
     router.get('/product_update',(request,response)=>{
         response.render('admin/product_update');
     })
+    //PRODUCT CATEGORY
     router.get('/product-categories',(request,response)=>{
         response.render('admin/product_category');
     })
-    router.get('/product-stock-in',(request,response)=>{
-        response.render('admin/stock_in');
+    router.post('/product-categories',(request,response)=>{
+        response.render('admin/product_category');
     })
-    router.get('/add_stock',(request,response)=>{
-        response.render('admin/stock_in_add');
+    router.get('/auth/updateProductCat/:category_id',(request,response)=>{
+        response.render('admin/update_product_category');
+    })
+    router.post('/auth/updateProductCat/:category_id',(request,response)=>{
+        response.render('admin/update_product_category');
     })
 
 

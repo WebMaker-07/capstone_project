@@ -6,17 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- Bootstrap CSS CDN -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
    <!-- Our Custom CSS -->
    <link rel="stylesheet"  href="/css/admin.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
    <!-- Font Awesome JS -->
    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-   
-   <style>
-   
-   </style>
     <title>Sidebars</title>
 </head>
 <body>
@@ -27,36 +22,35 @@
                 <strong>SWM</strong>
             </div>
             <ul class="list-unstyled components">
-                <li>
-                    <a class="active" href="/dashboard">
+                <li >
+                    <a href="/dashboard">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard
                     </a>
                 </li>
-                <li>
+                <li >
                     <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
                 </li>
-
-                  <li>
+                   <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/auth/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/auth/product-categories">
+                            <a class="active" href="/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
@@ -70,7 +64,6 @@
                         </li>
                     </ul>
                 </li>
-       
                
                 <li > 
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -114,14 +107,14 @@
             </ul>
         </nav>
         <div id="content" class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                
                 <div class="container">
                     <button class="btn btn-info d-lg-none" type="button" id="sidebarCollapse">
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Dashboard</a></h3>
+                    <h3 class="location px-5 pt-2"> <a href="">Products Category</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -156,90 +149,59 @@
                 </div>
             </nav>
             {{!-- Main Content --}}
-            <div class="main-content container-fluid">
-                <div class="row px-5">
-                    <div class="col  d-flex boxes greenBox">
-                        <i style="font-size:80px ; margin-right:20px;"class="fas fa-users"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Customer</p>
+            <div class="main-content container">
+
+                <div class="px-5">
+                    <div class="d-flex">
+                    <h3>Product Categories</h3>
+                    <form class="ml-auto" role="search">
+                        <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                         </div>
+                    </form>
+                    </div>  
+                    <form class="mb-3 w-50" role="search" action="/auth/updateProductCat/{{data.category_id}}" method="POST">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="text" name="category_name" value="{{data.category_name}}" placeholder="Product Category" >
+                        {{#if message}}
+                            <h4 class="alert {{color}}">
+                                {{message}}
+                            </h4>
+                        {{/if}}
+                        <button class="btn btn-warning text-dark" type="submit">Update <i class="bi bi-plus-square-fill"></i></button>
                     </div>
-                    <div class="col d-flex boxes orangeBox">
-                        <i style="font-size:80px ; margin-right:20px;"class="fas fa-cubes"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Products On Hand</p>
-                        </div>
+                    </form>
+
+                    <div class="table-responsive ">
+                    <table class="table table-success table-striped table-bordered">
+                        <thead>
+                        <th>#</th>
+                        <th scope="col">Product Category</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Action</th>
+                        </thead>
+                        <tbody>
+                        {{#each data}}
+                            <tr>
+                            <td>{{this.category_id}}</td>
+                            <td>{{this.category_name}}</td>
+                            <td>{{this.date_created}}</td>
+                            <td>
+                                <a href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                <a href="/auth/deleteProductCat/{{this.category_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                    <i class="bi bi-trash"></i></i> Delete</a>
+                            </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                     </div>
-                     <div class="col d-flex boxes redBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-graph-down-arrow"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Products Critical</p>
-                        </div>
-                    </div>
-                    <div class="col d-flex boxes violetBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-cart4"></i>
-                        <div>
-                            <h2>&#8369;14,340</h2>
-                            <p>Daily Sales</p>
-                        </div>
-                    </div>
-                    <div class="col d-flex boxes blueBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-bag-x"></i>
-                        <div>
-                            <h2>&#8369;15,000</h2>
-                            <p>Total Unpaid Order</p>
-                        </div>
-                    </div>
-                      <div class="col d-flex boxes yellowBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-bar-chart-line"></i>
-                        <div>
-                            <h2>&#8369;3,920</h2>
-                            <p>Profit</p>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="row gap-3 px-5 mt-5">
-                    <div class="col border border-1 border-dark-subtle bg-light-subtle ">
-                        <h4 class="pt-2 "><i class="bi bi-box-seam"></i> HIGHEST SELLING PRODUCTS</h4><hr>
-                        <table class="table table-danger table-striped table-hover">
-                            <thead>
-                                <th>Name</th>
-                                <th>Total Sold</th>
-                                <th>Total Quantity</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Mantika</td>
-                                    <td>20</td>
-                                    <td>100</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                     <div class="col border border-1 border-dark-subtle bg-light-subtle ">
-                        <h4 class="pt-2 "><i class="bi bi-box-seam"></i> LATEST SALE</h4><hr>
-                        <table class="table table-primary table-striped table-hover ">
-                            <thead>
-                                <th>#</th>
-                                <th>Product Name</th>
-                                <th>Date</th>
-                                <th>Total Sale</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mantika</td>
-                                    <td>04-20-2023</td>
-                                    <td>&#8369; 100.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
                 </div>
-            </div>
+
         </div>
     </div>
     <script src="js/index.js"></script>
@@ -250,13 +212,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  <script type="text/javascript">
+   <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
         });
         
+
+
+
           
     </script> 
     {{!-- <script>

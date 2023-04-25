@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a class="active" href="/customers">
+                    <a class="active" href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -43,21 +43,21 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a  href="/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
+                            <a href="/auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a href="/auth/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -162,27 +162,35 @@
                         </form>
                     </div>  
                     <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/customer_add" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
-
+                    {{#if message}}
+                        <h4 class="alert {{color}}">
+                            {{message}}
+                        </h4>
+                    {{/if}}
                     <table class="table table-success table-striped table-bordered">
                         <thead>
-                            <th>#</th>
+                            <th>Customer ID</th>
                             <th>Full Name</th>
-                            <th>Address</th>
                             <th>Contact</th>
+                            <th>Address</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
+                        {{#if data}}
+                        <tbody class="text-dark">
+                            {{#each data}}
                             <tr>
-                                <td>1</td>
-                                <td>Proffer Lhastly Faner</td>
-                                <td>Oriental Mindoro</td>
-                                <td>0912-234-5678</td>
+                                <td>{{this.customer_id}}</td>
+                                <td>{{this.fullname}}</td>
+                                <td>{{this.contact}}</td>
+                                <td>{{this.address}}</td>
                                 <td>
-                                    <a a href="/customer_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                     <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
+                                    <a a href="/auth/customer_update/{{this.customer_id}}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                    <a href="/auth/customer_delete/{{this.customer_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')" ><i class="bi bi-trash"></i></i> Delete</a>
                                 </td>
                             </tr>
+                            {{/each}}
                         </tbody>
+                        {{/if}}
                     </table>
                </div>
                 
@@ -202,10 +210,8 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
-        });
-        
-          
-    </script> 
+        }); 
+    </script>
     {{!-- <script>
          const username = sessionStorage.getItem("username");
             alert(username);

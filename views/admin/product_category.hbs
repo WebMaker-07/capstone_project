@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="/customers">
+                    <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -43,21 +43,21 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a  href="/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a class="active" href="/product-categories">
+                            <a class="active" href="/auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a href="/auth/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -153,49 +153,55 @@
 
                 <div class="px-5">
                     <div class="d-flex">
-                      <h3>Product Categories</h3>
-                         <form class="ml-auto" role="search">
-                            <div class="input-group">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                             </div>
-                        </form>
+                    <h3>Product Categories</h3>
+                    <form class="ml-auto" role="search">
+                        <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
                     </div>  
-                    <form class="mb-3 w-50" role="search">
-                            <div class="input-group">
-                                <input class="form-control me-2" type="text" placeholder="Product Category" >
-                                 <button class="btn btn-warning text-dark" type="submit">Add <i class="bi bi-plus-square-fill"></i></button>
-                             </div>
-                        </form>
-                   
+                    <form class="mb-3 w-50" role="search" action="/auth/add_category" method="POST">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="text" name="category_name" placeholder="Product Category" >
+                        <button class="btn btn-warning text-dark" type="submit">Add <i class="bi bi-plus-square-fill"></i></button>
+                        {{#if message}}
+                            <h5 class="alert {{color}}">
+                                {{message}}
+                            </h5>
+                        {{/if}}
+                    </div>
+                    </form>
 
                     <div class="table-responsive ">
-                        <table class="table table-success table-striped table-bordered  ">
-                                                <thead>
-                                                    <th>#</th>
-                                                    <th scope="col">Product Category</th>
-                                                    <th scope="col">Date Added</th>
-                                                    <th scope="col">Action</th>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td >1</td>
-                                                        <td>Sports</td>
-                                                        
-                                                        <td>April 25, 2023</td>
-                                                        <td>
-                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                    <table class="table table-success table-striped table-bordered">
+                        <thead>
+                        <th>#</th>
+                        <th scope="col">Product Category</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Action</th>
+                        </thead>
+                        <tbody>
+                        {{#each data}}
+                            <tr>
+                            <td>{{this.category_id}}</td>
+                            <td>{{this.category_name}}</td>
+                            <td>{{this.date_created}}</td>
+                            <td>
+                                <a href="/auth/updateProductCat/{{this.category_id}}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                <a href="/auth/deleteProductCat/{{this.category_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                    <i class="bi bi-trash"></i></i> Delete</a>
+                            </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                     </div>
-                    
-               </div>
-                
 
-            </div>
+                </div>
+
+                </div>
+
         </div>
     </div>
     <script src="js/index.js"></script>
@@ -213,6 +219,9 @@
             });
         });
         
+
+
+
           
     </script> 
     {{!-- <script>

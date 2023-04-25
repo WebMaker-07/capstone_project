@@ -9,11 +9,11 @@ const db = mysql.createConnection(
     });
 
 // for displaying customer
-exports.viewCustomer = (req,res)=>{
-
-    db.query('SELECT * from customers',
+exports.view_customer = (req,res)=>{
+    db.query('CALL customer_list()',
         (error,result)=>
             {
+                output = result[0];
                 if(error)
                     {
                         console.log("Error Message : " + error);
@@ -22,17 +22,27 @@ exports.viewCustomer = (req,res)=>{
                     {
                         res.render('admin/customers',
                             {
-                                title: "List of customers",
-                                data: result,
-                                message: "Add Customer"
+                                data: output
                             });
                     }
             });
 }
 
 // for adding customer
-exports.addCustomer = (req,res)=>{
+exports.add_customer = (req,res)=>{
     let {first_name, last_name, contact, address} = req.body;
+    function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+    first_name = valid(first_name);
+    last_name = valid(last_name);
+    contact = contact.trim();
+    address = address.trim();
+
     db.query('INSERT INTO customers set ?',
         {
             first_name: first_name,
@@ -48,8 +58,9 @@ exports.addCustomer = (req,res)=>{
                     }
                 else
                     {
-                        db.query('SELECT * FROM customers',(err,data)=>
+                        db.query('CALL customer_list()',(err,data)=>
                             {
+                                output= data[0];
                                 if(err)
                                     {
                                         console.log('Error Message: '+err);
@@ -58,17 +69,17 @@ exports.addCustomer = (req,res)=>{
                                     {
                                         res.render('admin/customers',
                                             {
-                                                title: "List of customers",
-                                                data: data,
-                                                message: "Customer added successfully!"
-                                            })
+                                                data: output,
+                                                message: "Customer added successfully!",
+                                                color: "alert-success"
+                                            });
                                     }
-                            })
+                            });
                     }
-            })
+            });
 }
 
-exports.update = (req,res)=>{
+exports.update_form = (req,res)=>{
     const id = req.params.customer_id;
     db.query('SELECT * FROM customers where customer_id = ?',[id],(err,data)=>
         {
@@ -78,34 +89,30 @@ exports.update = (req,res)=>{
                 }
             else
                 {
-                    db.query('SELECT * FROM customers',(err,result)=>
-                        {
-                            if(err)
-                                {
-                                    console.log('Error Message : '+err)
-                                }
-                            else
-                                {
-                                    res.render('admin/customers',
-                                        {
-                                            title: "List of customers",
-                                            cus: data[0],
-                                            data: result,
-                                            message: "Update Customer"
-                                        })
-                                }
-                        });
+                    res.render('admin/customer_update',{ data: data[0]});
                 }
         })
 }
 
-exports.updateCustomer = (req,res)=>{
-    const {first_name, last_name, contact, address, customer_id} = req.body;
+exports.update_customer = (req,res)=>{
+    let {first_name, last_name, contact, address, customer_id} = req.body;
+    function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+    first_name = valid(first_name);
+    last_name = valid(last_name);
+    contact = contact.trim();
+    address = address.trim();
+
     db.query('UPDATE customers SET first_name = ?, last_name = ?, contact = ? , address = ? where customer_id = ?',
         [first_name,last_name,contact,address,customer_id],
         (err,result)=>
             {
-                console.log(result);
+                // console.log(result);
                 if(err)
                     {
                         console.log('Error Message : '+err);
@@ -113,23 +120,58 @@ exports.updateCustomer = (req,res)=>{
                 else
                     {
                         console.log("Customer Updated!");
-                        // db.query('SELECT * FROM customers',
-                        //     (err,data)=>
-                        //         {
-                        //             if(err)
-                        //                 {
-                        //                     console.log('Error Message : '+err);
-                        //                 }
-                        //             else
-                        //                 {
-                        //                     res.render('admin/customers',
-                        //                         {
-                        //                             title: "List of customers",
-                        //                             data: data,
-                        //                             message: "Customer Updated!"
-                        //                         })
-                        //                 }
-                        //         })
+                        db.query('CALL customer_list()',(err,data)=>
+                            {
+                                output= data[0];
+                                if(err)
+                                    {
+                                        console.log('Error Message: '+err);
+                                    }
+                                else
+                                    {
+                                        res.render('admin/customers',
+                                            {
+                                                data: output,
+                                                message: "Customer updated successfully!",
+                                                color: "alert-info"
+                                            })
+                                    }
+                            });
+                    }
+            });
+}
+
+//for deleting customer
+exports.customer_delete = (req,res)=>{
+    const id = req.params.customer_id;
+    db.query('DELETE FROM customers where customer_id = ?',[id],
+        (error,result)=>
+            {
+                if(error)
+                    {
+                        console.log("Error message: " + error);
+                    }
+                else
+                    {
+                        db.query('CALL customer_list()',
+                        (error,result)=>
+                            {
+                                output = result[0];
+                                console.log(output);
+                                if(error)
+                                    {
+                                        console.log("Error Message : " + error);
+                                    }
+                                else if(result)
+                                    {
+                                        res.render('admin/customers',
+                                            {
+                                                data: output,
+                                                message: "Customer deleted successfully!",
+                                                color: "alert-danger"
+                                            });
+                                    }
+                            });
                     }
             })
 }

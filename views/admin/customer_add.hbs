@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a class="active" href="/customers">
+                    <a class="active" href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -43,21 +43,21 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/product-list">
+                            <a href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
+                            <a href="/auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a href="/auth/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -153,32 +153,32 @@
             <div class="main-content container">
                <div class="px-5  ">
                 
-                <form action="" class="px-4 pe-4 pt-3 pb-3 border border-5 border-success">
+                <form action="/auth/add_customer" class="px-4 pe-4 pt-3 pb-3 border border-5 border-success" method="post">
                     <h4>Adding Customer</h4>
                     <div class="row">
                        <div class="col">
                          <label for="" class="form-label">First Name</label>
-                         <input type="text" class="form-control" >
+                         <input type="text" name="first_name" id="first_name" class="form-control" required>
                        </div>
                        <div class="col">
                          <label for="" class="form-label">Last Name</label>
-                         <input type="text" class="form-control" >
+                         <input type="text" name="last_name" id="last_name" class="form-control" required >
                        </div>
                     </div>
                       <div class="row mt-3">
                         <div class="col">
-                            <label for="" class="form-label">Address</label>
-                            <input type="text" class="form-control" >
+                            <label for="" class="form-label">Contact</label>
+                            <input type="text" name="contact" id="contact" class="form-control" required>
                         </div>
                         <div class="col">
-                            <label for="" class="form-label">Contact</label>
-                            <input type="text" class="form-control" >
+                            <label for="" class="form-label">Address</label>
+                            <input type="text" name="address" id="address" class="form-control" required >
                         </div>
                         
                     </div>
                       <div class="mt-3">
-                            <button type=" submit"class="btn btn-success ">Save</button>
-                             <a href="/customers" class="btn btn-danger ">Cancel</a>
+                            <button type="submit"class="btn btn-success ">Save</button>
+                             <a href="/auth/customers" class="btn btn-danger ">Cancel</a>
                       </div>
                 </form>
                </div>

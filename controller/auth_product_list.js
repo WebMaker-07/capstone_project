@@ -33,7 +33,7 @@ const db = mysql.createConnection(
         const { product_id, product_name, category_id, suggested_price, actual_price, product_status } = req.body;
         db.query('INSERT INTO products set ?',
         {
-            product_id, product_id,
+            product_id: product_id,
             product_name: product_name,
             category_id: category_id,
             suggested_price: suggested_price,

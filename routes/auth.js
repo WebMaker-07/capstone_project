@@ -3,7 +3,7 @@ const router = express.Router();
 const product_cat = require('../controller/auth_product_category');
 const admin_controller = require('../controller/auth_account');
 const product_list = require('../controller/auth_product_list');
-
+const register = require('../controller/auth_admin_register');
 
 //CUSTOMERS
 router.get('/customers',admin_controller.view_customer);
@@ -23,5 +23,8 @@ router.post('/auth/updateProductCat/:category_id', product_cat.updateProductCatS
 router.get('/product-list',product_list.viewProductList);
 router.post('/product_add',product_list.addProductList);
 router.get('/deleteProduct/:product_id',product_list.deleteProductList);
+
+//REGISTER
+router.post('/register_admin',register.adduser);
 
 module.exports = router;

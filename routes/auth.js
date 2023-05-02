@@ -4,6 +4,7 @@ const product_cat = require('../controller/auth_product_category');
 const admin_controller = require('../controller/auth_account');
 const product_list = require('../controller/auth_product_list');
 const register = require('../controller/auth_admin_register');
+const login = require('../controller/auth_login');
 
 //CUSTOMERS
 router.get('/customers',admin_controller.view_customer);
@@ -25,6 +26,7 @@ router.post('/product_add',product_list.addProductList);
 router.get('/deleteProduct/:product_id',product_list.deleteProductList);
 
 //REGISTER
+router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
 
 module.exports = router;

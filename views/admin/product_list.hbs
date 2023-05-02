@@ -57,7 +57,7 @@
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a href="/auth/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -169,30 +169,28 @@
                                                     <th>Product</th>
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
-                                                    <th scope="col">In-Stock</th>
+                                                    <th scope="col">Suggested Price</th>
                                                     <th scope="col"> Buying Price</th>
                                                     <th scope="col">Selling Price</th>
                                                     <th scope="col">Date Added</th>
                                                     <th scope="col">Action</th>
                                                 </thead>
                                                 <tbody>
-                                                    {{#if data}}
-                                                        {{#each data}}
+                                                    {{#each data}}
                                                         <tr>
-                                                            <td >{{data.product_id}}</td>
-                                                            <td>{{data.product_name}}</td>
-                                                            <td>{{data.category_id}}</td>
-                                                            <td>{{data.product_status}}</td>
-                                                            <td>{{data.actual_price}}</td>
-                                                            <td>{{data.suggested_price}}</td>
-                                                            <td>{{data.date_created}}</td>
-                                                            <td>
-                                                                <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                                                <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
-                                                            </td>
-                                                        </tr>
-                                                        {{/each}}
-                                                    {{/if}}
+                                                        <td>{{this.product_id}}</td>
+                                                        <td>{{this.product_name}}</td>
+                                                        <td>{{this.category_name}}</td>
+                                                        <td>{{this.suggested_price}}</td>
+                                                        <td>{{this.actual_price}}</td>
+                                                        <td>{{this.actual_price}}</td>
+                                                        <td>{{this.date_update}}</td>
+                                                        <td>
+                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                                            <a href="/auth/deleteProduct/{{this.product_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')><i class="bi bi-trash"></i></i> Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                    {{/each}}
                                                 </tbody>
                                             </table>
                     </div>

@@ -29,4 +29,7 @@ router.get('/deleteProduct/:product_id',product_list.deleteProductList);
 router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
 
+//PRODUCT
+router.get('product-list',product_cat.viewProduct);
+router.post('/add_product',product_cat.addProduct);
 module.exports = router;

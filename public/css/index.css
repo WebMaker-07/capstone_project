@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700&family=IBM+Plex+Mono&family=Pacifico&family=Tillana:wght@500&display=swap');
+/* 
+font-family: 'Archivo Narrow', sans-serif;
+font-family: 'IBM Plex Mono', monospace;
+font-family: 'Pacifico', cursive;
+font-family: 'Tillana', cursive;
+*/
+body{
+    background-color: rgb(249, 250, 250);
+    color: rgb(11, 11, 11);
+}
+ h3{
+    font-family:'Archivo Narrow', sans-serif;
+    font-size: 40px;
+}
+header i{
+    font-size: 12px;
+}
+h2 , h1{
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 60px;
+    width: 100%;
+}
+p  {
+    font-family:'Archivo Narrow', sans-serif;
+    font-size: 30px;
+}
+span {
+    font-family:'Archivo Narrow', sans-serif;
+    font-size: 25px;
+}
+.container .row .about ul li {
+    font-family:'Archivo Narrow', sans-serif;
+    font-size: 20px;
+}
+.container .row .about {
+   margin-top: 60px;
+}
+
+.row .tagline p{
+    padding-right: 100px;
+}
+.row .tagline a{
+   background: rgba(114, 255, 171, 0.5);
+   font-size: 20px;
+   color:rgb(10, 10, 10);
+   font-weight: 500;
+}
+.row .tagline button:hover {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    background-color:rgb(156, 158, 160);
+    
+
+ }
+.row .tagline{
+    padding-top: 100px;
+    padding-left: 50px;
+}
+i{
+    font-size:50px
+}
+.wecando{
+    border-radius: 10px;
+    background: rgba(114, 255, 171, 0.5);
+    box-shadow: 2px 5px 5px 5px #51ddae;
+
+
+}
+footer p {
+    font-size: 20px;
+}
+.container .row .services p{
+    font-size: 20px;
+}
+.container .row .services h3{
+    font-size: 25px;
+}
+.container .row .services {
+    border-radius: 10px;
+    background: rgba(114, 255, 171, 0.5);
+    box-shadow: 2px 0px 5px 5px #51ddae;
+    /* padding:15; */
+    margin-left: 20px;
+}

@@ -29,35 +29,35 @@
                     </a>
                 </li>
                 <li >
-                    <a class="active" href="/auth/customers">
+                    <a href="/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
                 </li>
-                    <li>
+                <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a  href="/product-list">
+                            <a href="/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/auth/product-categories">
+                            <a href="/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a class="active" href="/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -115,7 +115,7 @@
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Customers</a></h3>
+                    <h3 class="location px-5 pt-3"> <a href="">Product List</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -151,48 +151,66 @@
             </nav>
             {{!-- Main Content --}}
             <div class="main-content container">
-               <div class="px-5">
+                <div class="px-5">
                     <div class="d-flex">
-                      <h3>List of Customers</h3>
-                         <form class="ml-auto" role="search">
+                      <h3>On Process Stocks</h3>
+                    </div>  
+                    <div>
+                        <form class="w-75 mb-3" action="auth/search_product" method="get">
                             <div class="input-group">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control" type="text" placeholder="Search" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                                
                              </div>
                         </form>
-                    </div>  
-                    <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/customer_add" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
-                    {{#if message}}
-                        <h4 class="alert {{color}}">
-                            {{message}}
-                        </h4>
-                    {{/if}}
-                    <table class="table table-success table-striped table-bordered">
-                        <thead>
-                            <th>Customer ID</th>
-                            <th>Full Name</th>
-                            <th>Contact</th>
-                            <th>Address</th>
-                            <th>Action</th>
-                        </thead>
-                        {{#if data}}
-                        <tbody class="text-dark">
-                            {{#each data}}
-                            <tr>
-                                <td>{{this.customer_id}}</td>
-                                <td>{{this.fullname}}</td>
-                                <td>{{this.contact}}</td>
-                                <td>{{this.address}}</td>
+                    </div>
+         
+                   <div class="table-responsive table-sm ">
+                        <table class="table table-success table-striped table-bordered" id="prodTable">
+                             <thead>
+                                <th scope="col">Product ID</th>
+                               <th scope="col">Product Name</th>
+                               <th scope="col">Description</th>
+                               <th scope="col">Category</th>
+                               <th scope="col">QTY</th>
+                                <th scope="col">Action</th>
+                             </thead>
+
+                             <tbody>
+                                {{#each data}}
+                                <tr>
+                                <td id="product_id">{{this.product_id}}</td>
+                                <td id="product_name">{{this.product_name}}</td>
+                                <td id="details">{{this.product_details}}</td>
+                                <td id="category_name">{{this.category_name}}</td>
+                                 <form action="/auth/on_process_stock" method="post">
+                                    <td><input type="number" name="quantity" id="quantity"></td>
                                 <td>
-                                    <a a href="/auth/customer_update/{{this.customer_id}}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                    <a href="/auth/customer_delete/{{this.customer_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')" ><i class="bi bi-trash"></i></i> Delete</a>
+                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
+                                     <i class="bi bi-plus-square-fill"></i> Add
+                               </form>
+                                 
+                                    
+                                    </button>
+                                     <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
+                                     class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-plus-square-fill"></i> Cancel
+                                    
+                                    </button>
+                                    
                                 </td>
-                            </tr>
+                                </tr>
                             {{/each}}
-                        </tbody>
-                        {{/if}}
-                    </table>
+                              </tbody>
+                          </table>
+
+                    </div>
+                 
+                     
+                 
                </div>
+                
+                
                 
             </div>
         </div>
@@ -205,20 +223,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-   <script type="text/javascript">
+      <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
-        }); 
-    </script>
-    {{!-- <script>
-         const username = sessionStorage.getItem("username");
-            alert(username);
+        });
+        
 
-            // Insert the username into the welcome message
-            document.getElementById("welcomeMessage").innerHTML = `Welcome, ${username}!`;
-            document.getElementById("greeting").innerHTML = username;
-    </script> --}}
+      document.getElementById('stockProduct').addEventListener('click',function(){
+        let productId = document.getElementById('product_id').innerHTML;
+        let productName = document.getElementById('product_name').innerHTML;
+        let details = document.getElementById('details').innerHTML;
+        let categoryName = document.getElementById('category_name').innerHTML;
+        let quantity = document.getElementById('quantity').value;
+
+
+        alert(quantity);
+      })
+      function cancelRow(row) {
+         row.remove();
+         window.location.href = ('/add_stock')
+            }       
+           
+    </script> 
+
 </body>
 </html>

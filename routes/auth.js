@@ -30,7 +30,9 @@ router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
 
 //PRODUCT
-router.get('product-list',product_cat.viewProduct);
-router.post('/add_product',product_cat.addProduct);
+// router.get('product-list',product_cat.viewProduct);
+// router.post('/add_product',product_cat.addProduct);
 // router.post('/search_product', admin_controller.searchProduct);
+
+
 module.exports = router;

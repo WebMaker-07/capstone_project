@@ -1,5 +1,6 @@
 let express = require('express');
 const router = express.Router();
+const product = require('../controller/auth_product');
 
 router.get('/',(request,response)=>{
     response.render('index');
@@ -44,6 +45,26 @@ router.get('/dashboard',(request,response)=>{
     router.post('/product-categories',(request,response)=>{
         response.render('admin/product_category');
     })
+
+    router.get('/customer_login',(request,response)=>{
+        response.render('customer/customer_login');
+    })
+    router.get('/index',(request,response)=>{
+        response.render('customer/home');
+    })
+
+
+    //STOCK
+    router.get('/product-stock-in',(request,response)=>{
+        response.render('admin/stock_in');
+    })
+    router.get('/add_stock',(request,response)=>{
+        response.render('admin/stock_in_add');
+    })
+
+  router.post('/search_product', product.seacrhProduct);
+    
+    
 
 
 module.exports = router;

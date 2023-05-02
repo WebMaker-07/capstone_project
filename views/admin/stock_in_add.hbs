@@ -153,52 +153,63 @@
             <div class="main-content container">
                 <div class="px-5">
                     <div class="d-flex">
-                      <h3>Add Stocks</h3>
+                      <h3>Add Stock</h3>
                     </div>  
                     <div>
-                        <form class="w-75 mb-3" action="auth/search_product" method="post">
+                        <form class="w-75 mb-3" action="/search_product" method="post">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search" >
+                                <input class="form-control" type="text" placeholder="Search" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                                 
                              </div>
                         </form>
                     </div>
          
-                   <div class="table-responsive ">
-                        <table class="table table-success table-striped table-bordered  ">
+                   <div class="table-responsive table-sm ">
+                        <table class="table table-success table-striped table-bordered" id="prodTable">
                              <thead>
-                               <th>#</th>
-                               <th scope="col">Product Code</th>
+                                <th scope="col">Product ID</th>
+                               <th scope="col">Product Name</th>
                                <th scope="col">Description</th>
+                               <th scope="col">Category</th>
                                <th scope="col">QTY</th>
-                               <th scope="col">Stock In Date</th>
-                               <th scope="col">Stock In BY</th>
-                               <th scope="col">Supplier</th>
                                 <th scope="col">Action</th>
                              </thead>
 
                              <tbody>
-                               <tr>
-                                 <td>1</td>
-                                 <td>P012348</td>
-                                 <td>Badminton</td>
-                                 <td>25</td>
-                                 <td>04-12-2023</td>
-                                 <td>Admin</td>
-                                 <td>Mac Branch</td>
-                                                     
-                                 <td>
-                                  <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                  <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
-                                  </td>
+                                {{#each data}}
+                                <tr>
+                                <td id="product_id">{{this.product_id}}</td>
+                                <td id="product_name">{{this.product_name}}</td>
+                                <td id="details">{{this.product_details}}</td>
+                                <td id="category_name">{{this.category_name}}</td>
+                                 <form action="/auth/on_process_stock" method="post">
+                                    <td><input type="number" name="quantity" id="quantity"></td>
+                                <td>
+                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
+                                     <i class="bi bi-plus-square-fill"></i> Add
+                               </form>
+                                 
+                                    
+                                    </button>
+                                     <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
+                                     class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-plus-square-fill"></i> Cancel
+                                    
+                                    </button>
+                                    
+                                </td>
                                 </tr>
+                            {{/each}}
                               </tbody>
                           </table>
+
                     </div>
                  
-                    
+                     
+                 
                </div>
+                
                 
                 
             </div>
@@ -220,7 +231,21 @@
         });
         
 
-          
+      document.getElementById('stockProduct').addEventListener('click',function(){
+        let productId = document.getElementById('product_id').innerHTML;
+        let productName = document.getElementById('product_name').innerHTML;
+        let details = document.getElementById('details').innerHTML;
+        let categoryName = document.getElementById('category_name').innerHTML;
+        let quantity = document.getElementById('quantity').value;
+
+
+        alert(quantity);
+      })
+      function cancelRow(row) {
+         row.remove();
+         window.location.href = ('/add_stock')
+            }       
+           
     </script> 
 
 </body>

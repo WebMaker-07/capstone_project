@@ -15,4 +15,7 @@ router.get('/product-categories',product_cat.viewProductCat);
 router.post('/add_category',product_cat.addProductcat);
 router.get('/delete_category/:category_id', product_cat.deleteProductCat);
 
+//PRODUCT
+router.get('product-list',product_cat.viewProduct);
+router.post('/add_product',product_cat.addProduct);
 module.exports = router;

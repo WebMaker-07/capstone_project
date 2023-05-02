@@ -74,7 +74,64 @@ const db = mysql.createConnection(
           }
         });
       };
-      
+
+//PRODUCT
+//view product
+    exports.viewProduct = (req,res)=> {
+        db.query('SELECT * FROM products',(err,result)=>
+        {
+            if(err)
+                {
+                    console.log('Error message: ' + err)
+                }
+            else
+                {
+                    res.render('admin/product-list',
+                        {
+                            data:result
+                        });
+                }
+        });
+    }
+
+//add product
+    exports.addProduct = (req,res)=> {
+        const {product_name, actual_price, suggested_price, category_id, product_status } = req.body;
+        db.query('INSERT INTO products set ?',
+            {
+                product_name:product_name,
+                actual_price: actual_price,
+                suggested_price: suggested_price,
+                category_id: category_id,
+                product_status: product_status
+            },
+            (err,result)=>
+                {
+                    if(err)
+                        {
+                            console.log('Error message: ' + err)
+                        }
+                    else
+                        {
+                            db.query('SELECT * FROM products',(err,result)=>
+                                {
+                                    if(err)
+                                        {
+                                            console.log('Error message: ' + err)
+                                        }
+                                    else
+                                        {
+                                            res.render('admin/product-list',
+                                                {
+                                                    message:"Product added",
+                                                    data:result
+                                                });
+                                        }
+                                });
+                            
+                        }
+                });
+    }
     
 
 

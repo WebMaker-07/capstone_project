@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="/customers">
+                    <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -43,14 +43,14 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a class="active" href="/product-list">
+                            <a class="active" href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
+                            <a href="/auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
@@ -166,7 +166,7 @@
                     <div class="table-responsive ">
                         <table class="table table-success table-striped table-bordered  ">
                                                 <thead>
-                                                    <th>#</th>
+                                                    <th>Product</th>
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">In-Stock</th>
@@ -176,19 +176,23 @@
                                                     <th scope="col">Action</th>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td >1</td>
-                                                        <td>Badminton</td>
-                                                        <td>Sports</td>
-                                                        <td>100 pcs</td>
-                                                        <td>&#8369; 150.00</td>
-                                                        <td>&#8369; 250.00</td>
-                                                        <td>April 25, 2023</td>
-                                                        <td>
-                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
-                                                        </td>
-                                                    </tr>
+                                                    {{#if data}}
+                                                        {{#each data}}
+                                                        <tr>
+                                                            <td >{{data.product_id}}</td>
+                                                            <td>{{data.product_name}}</td>
+                                                            <td>{{data.category_id}}</td>
+                                                            <td>{{data.product_status}}</td>
+                                                            <td>{{data.actual_price}}</td>
+                                                            <td>{{data.suggested_price}}</td>
+                                                            <td>{{data.date_created}}</td>
+                                                            <td>
+                                                                <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                                                <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    {{/if}}
                                                 </tbody>
                                             </table>
                     </div>

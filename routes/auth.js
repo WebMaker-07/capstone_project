@@ -5,6 +5,7 @@ const admin_controller = require('../controller/auth_account');
 const product_list = require('../controller/auth_product_list');
 const register = require('../controller/auth_admin_register');
 const login = require('../controller/auth_login');
+const product = require('../controller/auth_product');
 
 //CUSTOMERS
 router.get('/customers',admin_controller.view_customer);
@@ -34,5 +35,6 @@ router.post('/register_admin',register.adduser);
 // router.post('/add_product',product_cat.addProduct);
 // router.post('/search_product', admin_controller.searchProduct);
 
-
+//STOCK METHOD
+//  router.get('/product-stock-in', product.viewStockList);
 module.exports = router;

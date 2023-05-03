@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="/customers">
+                    <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -50,7 +50,7 @@
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
+                            <a href="auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
@@ -183,8 +183,11 @@
                                 <td id="product_name">{{this.product_name}}</td>
                                 <td id="details">{{this.product_details}}</td>
                                 <td id="category_name">{{this.category_name}}</td>
-                                 <form action="/auth/on_process_stock" method="post">
-                                    <td><input type="number" name="quantity" id="quantity"></td>
+                                 <form action="/process_stock" method="post">
+                                    <td>
+                                        <input type="hidden" name="product_id" value="{{this.product_id}}">
+                                        <input type="number" name="quantity" id="quantity">
+                                    </td>
                                 <td>
                                     <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
                                      <i class="bi bi-plus-square-fill"></i> Add

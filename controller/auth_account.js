@@ -9,23 +9,24 @@ const db = mysql.createConnection(
     });
 
 // for displaying customer
-exports.view_customer = (req,res)=>{
-    db.query('CALL customer_list()',
-        (error,result)=>
+exports.view_customer= (req,res) =>{
+    db.query('SELECT * FROM customers ',
+    (error,result)=>
+    {
+        console.log(result)
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            res.render('admin/customers',
             {
-                output = result[0];
-                if(error)
-                    {
-                        console.log("Error Message : " + error);
-                    }
-                else if(result)
-                    {
-                        res.render('admin/customers',
-                            {
-                                data: output
-                            });
-                    }
+                data: result,
             });
+        }
+        
+    });
 }
 
 // for adding customer

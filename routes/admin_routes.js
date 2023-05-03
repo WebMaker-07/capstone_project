@@ -54,15 +54,17 @@ router.get('/dashboard',(request,response)=>{
     })
 
 
-    //STOCK
-    router.get('/product-stock-in',(request,response)=>{
-        response.render('admin/stock_in');
-    })
+    //STOCK ROUTES
+    // router.get('/product-stock-in',(request,response)=>{
+    //     response.render('admin/stock_in');
+    // })
     router.get('/add_stock',(request,response)=>{
         response.render('admin/stock_in_add');
     })
-
-  router.post('/search_product', product.seacrhProduct);
+     //STOCK METHOD
+     router.get('/product-stock-in', product.viewStockList);
+     router.post('/search_product', product.seacrhProduct);
+     router.post('/process_stock', product.processStock);
     
     
 

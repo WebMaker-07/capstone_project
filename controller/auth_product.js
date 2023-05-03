@@ -10,7 +10,7 @@ const db = mysql.createConnection(
 
 //View the list of stocks
 exports.viewStockList= (req,res) =>{
-    db.query('SELECT * FROM stock_in',
+    db.query('SELECT * FROM stock_in LEFT JOIN products ON products.product_id = stock_in.product_id',
     (error,result)=>
     {
         console.log(result)
@@ -44,6 +44,29 @@ exports.seacrhProduct= (req,res) =>{
             res.render('admin/stock_in_add',
             {
                 data: result,
+            });
+        }
+        
+    });
+}
+
+exports.processStock= (req,res) =>{
+    const {product_id , quantity} = req.body;
+    console.log(product_id);
+    db.query(`INSERT INTO stock_in(product_id , quantity) VALUES(?,?) `,[product_id ,quantity],
+    (error,result)=>
+    {
+        console.log(result)
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            res.render('admin/stock_in',
+            {
+                data: result,
+                message: "Sucessfully Add Stocks"
             });
         }
         

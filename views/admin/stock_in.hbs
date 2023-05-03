@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="/customers">
+                    <a href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -50,7 +50,7 @@
                         </li>
                         <li>
                             
-                            <a href="/product-categories">
+                            <a href="auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
@@ -162,37 +162,30 @@
                         </form>
                     </div>  
                     <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/add_stock" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
+                      {{#if message }}
+                      {{!-- Alert with closing action --}}
+                       <p class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>{{message}}</p>
+                      {{/if }}
                    <div class="table-responsive ">
                         <table class="table table-success table-striped table-bordered  ">
-                                                <thead>
-                                                    <th>#</th>
-                                                    <th scope="col">Stock #</th>
-                                                    <th scope="col">Product Code</th>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">QTY</th>
-                                                    <th scope="col">Stock In Date</th>
-                                                    <th scope="col">Stock In BY</th>
-                                                    <th scope="col">Supplier</th>
-                                                    <th scope="col">Action</th>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>S123-345</td>
-                                                        <td>P012348</td>
-                                                        <td>Badminton</td>
-                                                        <td>25</td>
-                                                        <td>04-12-2023</td>
-                                                        <td>Admin</td>
-                                                        <td>Mac Branch</td>
-                                                     
-                                                        <td>
-                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                                            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></i> Delete</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                           <thead>
+                               <th>#</th>
+                               <th scope="col">Stock #</th>
+                               <th scope="col">Product Name</th>
+                               <th scope="col">Description</th>
+                               <th scope="col">QTY</th>
+                            </thead>
+                            <tbody>
+                              {{#each data}}
+                                <tr>
+                                    <td id="stock_id">{{this.stock_in_id}}</td>
+                                    <td id="product_name">{{this.product_name}}</td>
+                                    <td id="details">{{this.product_details}}</td>
+                                    <td id="category_name">{{this.quantity}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>                
+                        </table>
                     </div>
                  
                     

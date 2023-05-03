@@ -13,7 +13,6 @@ exports.view_customer= (req,res) =>{
     db.query('SELECT * FROM customers ',
     (error,result)=>
     {
-        console.log(result)
         if(error)
         {
             console.log("Error Message : " + error);
@@ -32,6 +31,7 @@ exports.view_customer= (req,res) =>{
 // for adding customer
 exports.add_customer = (req,res)=>{
     let {first_name, last_name, contact, address} = req.body;
+    let store_id = 1;
     function valid(value)
         {
             value = value.replace(/[^a-zA-Z0-9 ]/g, '');
@@ -43,41 +43,56 @@ exports.add_customer = (req,res)=>{
     last_name = valid(last_name);
     contact = contact.trim();
     address = address.trim();
-
-    db.query('INSERT INTO customers set ?',
+    db.query('SELECT * FROM customers where contact = ?',contact,(err,data)=>
         {
-            first_name: first_name,
-            last_name: last_name,
-            contact: contact,
-            address: address
-        },
-        (err,result)=>
-            {
-                if(err)
-                    {
-                        console.log('Error Message: '+err);
-                    }
-                else
-                    {
-                        db.query('CALL customer_list()',(err,data)=>
+            if(data)
+                {
+                    console.log("Contact number existed!");
+                    res.render('admin/customer_add',
+                        {
+                            message:"Contact number existed!",
+                            color: "alert-danger"
+                        });
+                }
+            else
+                {
+                    db.query('INSERT INTO customers set ?',
+                        {
+                            store_id: store_id,
+                            first_name: first_name,
+                            last_name: last_name,
+                            contact: contact,
+                            address: address
+                        },
+                        (err,result)=>
                             {
-                                output= data[0];
                                 if(err)
                                     {
                                         console.log('Error Message: '+err);
                                     }
                                 else
                                     {
-                                        res.render('admin/customers',
+                                        db.query('SELECT * FROM customers',(err,output)=>
                                             {
-                                                data: output,
-                                                message: "Customer added successfully!",
-                                                color: "alert-success"
+                                                if(err)
+                                                    {
+                                                        console.log('Error Message: '+err);
+                                                    }
+                                                else
+                                                    {
+                                                        res.render('admin/customers',
+                                                            {
+                                                                data: output,
+                                                                message: "Customer added successfully!",
+                                                                color: "alert-success"
+                                                            });
+                                                    }
                                             });
                                     }
                             });
-                    }
-            });
+                }
+                
+        });
 }
 
 exports.update_form = (req,res)=>{
@@ -121,9 +136,8 @@ exports.update_customer = (req,res)=>{
                 else
                     {
                         console.log("Customer Updated!");
-                        db.query('CALL customer_list()',(err,data)=>
+                        db.query('SELECT * FROM customers',(err,output)=>
                             {
-                                output= data[0];
                                 if(err)
                                     {
                                         console.log('Error Message: '+err);
@@ -154,11 +168,9 @@ exports.customer_delete = (req,res)=>{
                     }
                 else
                     {
-                        db.query('CALL customer_list()',
+                        db.query('SELECT * FROM customers',
                         (error,result)=>
                             {
-                                output = result[0];
-                                console.log(output);
                                 if(error)
                                     {
                                         console.log("Error Message : " + error);
@@ -167,7 +179,7 @@ exports.customer_delete = (req,res)=>{
                                     {
                                         res.render('admin/customers',
                                             {
-                                                data: output,
+                                                data: result,
                                                 message: "Customer deleted successfully!",
                                                 color: "alert-danger"
                                             });
@@ -178,7 +190,24 @@ exports.customer_delete = (req,res)=>{
 }
 
 
-// exports.searchProduct =(req, res)=>{
-//     const {search} = req.body;
-//     db.query("SELECT * FROM products WHERE ")
-// }
+exports.search_customer =(req, res)=>{
+    let {search} = req.body;
+    db.query('SELECT * FROM customers WHERE last_name = ?',search,(err,result)=>
+        {
+            if(result==0)
+                {
+                    res.render('admin/customers',
+                        {
+                            message: "Customer not existed!",
+                            color: "alert-warning"
+                        });
+                }
+            else
+                {
+                    res.render('admin/customers',
+                        {
+                            data:result
+                        });
+                }
+        });
+}

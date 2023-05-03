@@ -13,6 +13,7 @@ router.post('/add_customer',admin_controller.add_customer);
 router.get('/customer_update/:customer_id', admin_controller.update_form);
 router.post('/update_customer', admin_controller.update_customer);
 router.get('/customer_delete/:customer_id', admin_controller.customer_delete);
+router.post('/search_customer', admin_controller.search_customer);
 
 //PRODUCT CATEGORY
 router.get('/product-categories',product_cat.viewProductCat);

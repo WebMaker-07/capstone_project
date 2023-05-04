@@ -25,7 +25,10 @@ router.post('/auth/updateProductCat/:category_id', product_cat.updateProductCatS
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);
 router.post('/product_add',product_list.addProductList);
+router.get('/product_update/:product_id',product_list.updateProductForm);
+router.post('/update_product',product_list.updateProduct);
 router.get('/deleteProduct/:product_id',product_list.deleteProductList);
+router.post('/search_product',product_list.searchProduct);
 
 //REGISTER
 router.get('/register_admins',register.viewuser);

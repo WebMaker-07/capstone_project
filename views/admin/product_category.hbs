@@ -163,24 +163,23 @@
                         </form>
                     </div>  
 
-                    <form class="mb-3 w-50" role="search" id="categoryForm" action="/auth/product-categories" method="POST">
+                    <form class="mb-3 w-50" role="search" id="categoryForm" action="{{action}}" method="POST">
                         <div class="input-group">
                             <input class="form-control me-2" type="text" name="category_name" id="category_name" placeholder="Product Category" value="{{data.category_name}}">
-                            <input type="hidden" name="category_id" value="{{category_id}}">
+                            <input type="hidden" name="category_id" id="category_id">
                             <button class="btn btn-warning text-dark  me-2" type="submit" id="submitBtn">Add<i class="bi {{#if category_id}}bi-pencil-square{{else}}bi-plus-square-fill{{/if}}"></i>
                             </button>
-                            <button class="btn btn-primary text-dark  me-2 d-none" type="button" id="updateBtn">Update<i class="bi bi-pencil-square"></i>
+                            <button class="btn btn-primary text-dark  me-2 d-none" type="submit" id="updateBtn">Update<i class="bi bi-pencil-square"></i>
                             </button>
                         </div>
-                        <div>
+                    </form>
+                    <div>
                             {{#if message}}
                                 <h5 class="alert {{color}}">
                                     {{message}}
                                 </h5>
                             {{/if}}
-                        </div>
-                    </form>
-
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-success table-striped table-bordered">
                             <thead>
@@ -242,9 +241,10 @@
     function updateCategory(categoryId, categoryName) {
         // Set the value of the input field to the current category name
         document.getElementById('category_name').value = categoryName;
+        document.getElementById('category_id').value = categoryId;
         
         // Change the form action to point to the update route
-        document.getElementById('categoryForm').setAttribute('action', `/auth/update_category/${categoryId}`);
+        document.getElementById('categoryForm').setAttribute('action', `/auth/update_category`);
         
         // Change the button text to "Update"
         document.getElementById('submitBtn').classList.add('d-none');

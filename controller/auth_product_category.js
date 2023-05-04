@@ -10,11 +10,10 @@ const db = mysql.createConnection(
     // console.log(db)
 
 
-    exports.viewProductCat = (req,res) =>{
+  exports.viewProductCat = (req,res) =>{
         db.query('SELECT * from products_category',
         (error,result)=>
         {
-            console.log(result)
             if(error)
             {
                 console.log("Error Message : " + error);
@@ -23,6 +22,7 @@ const db = mysql.createConnection(
             {
                 res.render('admin/product_category',
                 {
+                    action:"/auth/product-categories",
                     data: result,
                 });
             }
@@ -30,34 +30,49 @@ const db = mysql.createConnection(
         });
     }
         // update category
-        exports.updateCategory = (req, res) => {
-          const { category_name } = req.body;
-          const category_id = req.params.category_id;
-        
-          db.query(
-            'UPDATE products_category SET category_name = ? WHERE category_id = ?',
+  exports.updateCategory = (req, res) => {
+          const { category_id, category_name } = req.body;
+          db.query('UPDATE products_category SET category_name = ? WHERE category_id = ?',
             [category_name, category_id],
             (err, result) => {
               if (err) {
                 console.log(err);
                 res.status(500).send('An error occurred while updating the category.');
               } else {
-                console.log(result);
-        
-                // Change the button text to "Cancel Update"
-                const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
-                document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
-        
-                res.redirect('/admin/product_category');
+                // console.log(result);
+                // // Change the button text to "Cancel Update"
+                // const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
+                // document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
+                // res.redirect('/admin/product_category');
+
+                db.query('SELECT * from products_category',
+                (error,output)=>
+                {
+                    if(error)
+                    {
+                        console.log("Error Message : " + error);
+                    }
+                    else
+                    {
+                        res.render('admin/product_category',
+                        {
+                            message:"Product category successfully updated!",
+                            action:"/auth/product-categories",
+                            data: output,
+                            color:"alert-info"
+                        });
+                    }
+                    
+                });
               }
             }
           );
-        };
+    };
         
         
 
     // add or update category
-    exports.addProductcat = (req, res) => {
+  exports.addProductcat = (req, res) => {
       const { category_name } = req.body;
       db.query(
         'INSERT INTO products_category SET ?',
@@ -90,28 +105,28 @@ const db = mysql.createConnection(
 
     
     
-    exports.deleteProductCat = (req, res) => {
-        const categoryId = req.params.category_id;
-        db.query("DELETE FROM products_category WHERE category_id = ?", [categoryId], 
-        (err, result) => {
-          if (err) {
-            console.log("Error Message: " + err);
-          } else {
-            db.query('SELECT * FROM products_category', (err, delData) => {
-              if (err) {
-                console.log('Error Message: ' + err);
-              } else {
-                res.render('admin/product_category', {
-                  title: "List of Product_Category",
-                  data: delData,
-                  message: "Product Category deleted successfully!",
-                  color: "alert-danger"
-                });
-              }
-            });
-          }
-        });
-      };
+  exports.deleteProductCat = (req, res) => {
+      const categoryId = req.params.category_id;
+      db.query("DELETE FROM products_category WHERE category_id = ?", [categoryId], 
+      (err, result) => {
+        if (err) {
+          console.log("Error Message: " + err);
+        } else {
+          db.query('SELECT * FROM products_category', (err, delData) => {
+            if (err) {
+              console.log('Error Message: ' + err);
+            } else {
+              res.render('admin/product_category', {
+                title: "List of Product_Category",
+                data: delData,
+                message: "Product Category deleted successfully!",
+                color: "alert-danger"
+              });
+            }
+          });
+        }
+      });
+    };
       
 
 

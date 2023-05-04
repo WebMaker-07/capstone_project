@@ -19,8 +19,7 @@ router.post('/search_customer', admin_controller.search_customer);
 router.get('/product-categories',product_cat.viewProductCat);
 router.post('/product-categories',product_cat.addProductcat);
 router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
-router.get('/auth/update_category/:category_id', product_cat.updateCategory);
-router.post('/auth/update_category/:category_id', product_cat.updateCategory);
+router.post('/update_category', product_cat.updateCategory);
 
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);

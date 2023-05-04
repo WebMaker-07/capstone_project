@@ -46,13 +46,7 @@ router.get('/dashboard',(request,response)=>{
         response.render('admin/product_category');
     })
 
-    router.get('/customer_login',(request,response)=>{
-        response.render('customer/customer_login');
-    })
-    router.get('/index',(request,response)=>{
-        response.render('customer/home');
-    })
-
+   
 
     //STOCK ROUTES
     router.get('/add_stock',(request,response)=>{
@@ -67,6 +61,13 @@ router.get('/dashboard',(request,response)=>{
      router.get('/store1/index',(request,response)=>{
         response.render('customer/home');
     })
+    router.get('/store1/login',(request,response)=>{
+        response.render('customer/customer_login');
+    })
+    router.get('/store1/register',(request,response)=>{
+        response.render('customer/customer_register');
+    })
+
     
     
 

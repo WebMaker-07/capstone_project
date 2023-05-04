@@ -154,51 +154,60 @@
 
                 <div class="px-5">
                     <div class="d-flex">
-                    <h3>Product Categories</h3>
-                    <form class="ml-auto" role="search">
+                        <h3>Product Categories</h3>
+                        <form class="ml-auto" role="search">
+                            <div class="input-group">
+                                <input class="form-control me-2" type="search"  placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success"  type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </form>
+                    </div>  
+
+                    <form class="mb-3 w-50" role="search" id="categoryForm" action="/auth/product-categories" method="POST">
                         <div class="input-group">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                            <input class="form-control me-2" type="text" name="category_name" id="category_name" placeholder="Product Category" value="{{category_name}}">
+                            <input type="hidden" name="category_id" value="{{category_id}}">
+                            <button class="btn btn-warning text-dark  me-2" type="submit" id="submitBtn">Add<i class="bi {{#if category_id}}bi-pencil-square{{else}}bi-plus-square-fill{{/if}}"></i>
+                            </button>
+                            <button class="btn btn-primary text-dark  me-2 d-none" type="button" id="updateBtn">Update<i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
+                        <div>
+                            {{#if message}}
+                                <h5 class="alert {{color}}">
+                                    {{message}}
+                                </h5>
+                            {{/if}}
                         </div>
                     </form>
-                    </div>  
-                    <form class="mb-3 w-50" role="search" action="/auth/add_category" method="POST">
-                    <div class="input-group">
-                        <input class="form-control me-2" type="text" name="category_name" placeholder="Product Category" >
-                        <button class="btn btn-warning text-dark" type="submit">Add <i class="bi bi-plus-square-fill"></i></button>
-                        {{#if message}}
-                            <h5 class="alert {{color}}">
-                                {{message}}
-                            </h5>
-                        {{/if}}
-                    </div>
-                    </form>
 
-                    <div class="table-responsive ">
-                    <table class="table table-success table-striped table-bordered">
-                        <thead>
-                        <th>#</th>
-                        <th scope="col">Product Category</th>
-                        <th scope="col">Date Added</th>
-                        <th scope="col">Action</th>
-                        </thead>
-                        <tbody>
-                        {{#each data}}
-                            <tr>
-                            <td>{{this.category_id}}</td>
-                            <td>{{this.category_name}}</td>
-                            <td>{{this.date_created}}</td>
-                            <td>
-                                <a href="/auth/updateProductCat/{{this.category_id}}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                <a href="/auth/deleteProductCat/{{this.category_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
-                                    <i class="bi bi-trash"></i></i> Delete</a>
-                            </td>
-                            </tr>
-                        {{/each}}
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-success table-striped table-bordered">
+                            <thead>
+                                <th>#</th>
+                                <th scope="col">Product Category</th>
+                                <th scope="col">Date Added</th>
+                                <th scope="col">Action</th>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                    <tr>
+                                        <td>{{this.category_id}}</td>
+                                        <td>{{this.category_name}}</td>
+                                        <td>{{this.date_created}}</td>
+                                        <td>
+                                           <button class="btn btn-outline-success btn-sm" onclick="updateCategory('{{this.category_id}}', '{{this.category_name}}')">
+                                            <i class="bi bi-pencil-square"></i> Update
+                                            </button>
+                                            <a href="/auth/deleteProductCat/{{this.category_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
 
                 </div>
@@ -214,6 +223,30 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
    <script type="text/javascript">
+
+            //function for update
+    function updateCategory(categoryId, categoryName) {
+        // Set the value of the input field to the current category name
+        document.getElementById('category_name').value = categoryName;
+        
+        // Change the form action to point to the update route
+        document.getElementById('categoryForm').setAttribute('action', `/auth/update_category/${categoryId}`);
+        
+        // Change the button text to "Update"
+        document.getElementById('submitBtn').classList.add('d-none');
+        document.getElementById('updateBtn').classList.remove('d-none');
+    }
+    
+    //function for cancel update
+    function cancelUpdate() {
+        // Reset the form to its original state
+        document.getElementById('category_name').value = '';
+        document.getElementById('categoryForm').setAttribute('action', '/auth/add_category');
+        document.getElementById('submitBtn').classList.remove('d-none');
+        document.getElementById('updateBtn').classList.add('d-none');
+    }
+
+
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');

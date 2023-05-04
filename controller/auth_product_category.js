@@ -33,6 +33,7 @@ const db = mysql.createConnection(
         exports.updateCategory = (req, res) => {
           const { category_name } = req.body;
           const category_id = req.params.category_id;
+        
           db.query(
             'UPDATE products_category SET category_name = ? WHERE category_id = ?',
             [category_name, category_id],
@@ -42,11 +43,17 @@ const db = mysql.createConnection(
                 res.status(500).send('An error occurred while updating the category.');
               } else {
                 console.log(result);
+        
+                // Change the button text to "Cancel Update"
+                const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
+                document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
+        
                 res.redirect('/admin/product_category');
               }
             }
           );
-        }
+        };
+        
         
 
     // add or update category

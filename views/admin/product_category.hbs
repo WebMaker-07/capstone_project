@@ -157,7 +157,7 @@
                         <h3>Product Categories</h3>
                         <form class="ml-auto" role="search">
                             <div class="input-group">
-                                <input class="form-control me-2" type="search"  placeholder="Search" aria-label="Search">
+                                <input class="form-control me-2" type="search"  placeholder="Search" aria-label="Search" id="searchInput">
                                 <button class="btn btn-outline-success"  type="submit"><i class="bi bi-search"></i></button>
                             </div>
                         </form>
@@ -191,7 +191,7 @@
                             </thead>
                             <tbody>
                                 {{#each data}}
-                                    <tr>
+                                    <tr class="categoryRow">
                                         <td>{{this.category_id}}</td>
                                         <td>{{this.category_name}}</td>
                                         <td>{{this.date_created}}</td>
@@ -224,6 +224,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
    <script type="text/javascript">
 
+       $(document).ready(function() {
+        $('#searchInput').on('keyup', function() {
+            var searchText = $(this).val().toLowerCase();
+            $('.categoryRow').each(function() {
+                var category = $(this).find('td:nth-child(2)').text().toLowerCase();
+                if (category.indexOf(searchText) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+
             //function for update
     function updateCategory(categoryId, categoryName) {
         // Set the value of the input field to the current category name
@@ -236,15 +250,17 @@
         document.getElementById('submitBtn').classList.add('d-none');
         document.getElementById('updateBtn').classList.remove('d-none');
     }
-    
-    //function for cancel update
-    function cancelUpdate() {
+
+            function cancelUpdate() {
         // Reset the form to its original state
         document.getElementById('category_name').value = '';
-        document.getElementById('categoryForm').setAttribute('action', '/auth/add_category');
+        document.getElementById('categoryForm').setAttribute('action', '/auth/product-categories');
         document.getElementById('submitBtn').classList.remove('d-none');
         document.getElementById('updateBtn').classList.add('d-none');
-    }
+        document.getElementById('updateBtn').innerHTML = 'Update<i class="bi bi-pencil-square"></i>';
+        }
+
+
 
 
         $(document).ready(function () {

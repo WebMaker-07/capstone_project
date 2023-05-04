@@ -11,6 +11,7 @@ const product = require('../controller/auth_product');
 router.get('/customers',admin_controller.view_customer);
 router.post('/add_customer',admin_controller.add_customer);
 router.get('/customer_delete/:customer_id', admin_controller.customer_delete);
+router.post('/search_customer', admin_controller.search_customer);
 
 //PRODUCT CATEGORY
 router.get('/product-categories',product_cat.viewProductCat);

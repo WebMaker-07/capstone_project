@@ -9,7 +9,7 @@
     <title>Customer Dashboard</title>
     <style>
         body{
-            background-color: rgb(0, 0, 0);
+            background-color: rgb(255, 251, 251);
         }
     </style>
 </head>
@@ -61,7 +61,7 @@
 
     {{!-- Banner Section --}}
     <div>
-        <div class="container-fluid text-center bg-light">
+        <div class="container-fluid text-center bg-dark text-white">
                 <div style="padding-top:100px; padding-bottom: 100px" >
                     <h2 style="font-size: 5em"> Welcome to Store Name</h2>
                     <p style="font-style: italic;">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, nisi."</p>
@@ -70,62 +70,88 @@
         </div>
     </div>
      {{!--END Banner Section --}}
-     <div class="text-white">
-        <h2>Expore All</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-   <div class="card bg-dark text-white" style="width:80%">
-      <img src="images/crayon.png" class="card-img-top p-2"
-        alt="Palm Springs Road" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card bg-dark text-white" style="width:80%">
-      <img src="images/crayon.png" class="card-img-top p-2"
-        alt="Palm Springs Road" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-   <div class="card bg-dark text-white" style="width:80%">
-      <img src="images/crayon.png" class="card-img-top p-2"
-        alt="Palm Springs Road" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
-        alt="Skyscrapers" />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+     <div class="text-dark container">
+        <div class="text-center pt-3">
+            <h1>Feature Products</h1>
+            <p>Visit our shop to see amazing produts</p>
+            <div class="d-flex  justify-align-center">
+            <a href="" class="text-decoration-none text-dark px-3">Personal Hygiene</a>
+            <a href="" class="text-decoration-none text-dark px-3">Personal Hygiene</a>
+            <a href="" class="text-decoration-none text-dark px-3">Personal Hygiene</a>
+
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">  
+          <div class="col text-center">
+          <div class="card border-0" style="width:80%">
+              <img src="images/crayon.png" class="card-img-top  "
+                alt="Palm Springs Road" />
+              <div class="card-body">
+                  
+                <h3><strong><a href="" class="card-title text-decoration-none ">Dove Soap</a></strong></h3>
+                <p>Pink 100g.</p>
+                <h5>&#8369; 100.00</h5>
+              
+                  
+                   <p class=>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                  
+                    </p>
+                   
+                    <form action="">
+                          <button class="btn btn-danger">Add to Cart <i class="bi bi-cart4"></i></button>
+                    </form>
+                 
+               
+                  
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-dark text-white" style="width:80%">
+              <img src="images/crayon.png" class="card-img-top p-2"
+                alt="Palm Springs Road" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a longer card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+          <div class="card bg-dark text-white" style="width:80%">
+              <img src="images/crayon.png" class="card-img-top p-2"
+                alt="Palm Springs Road" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a longer card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top rounded-circle"
+                alt="Skyscrapers" />
+                <a href="">Product 1</a>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a longer card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
      </div>
 </div>
 

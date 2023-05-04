@@ -45,7 +45,7 @@ exports.add_customer = (req,res)=>{
     address = address.trim();
     db.query('SELECT * FROM customers where contact = ?',contact,(err,data)=>
         {
-            if(data)
+            if(data!=0)
                 {
                     console.log("Contact number existed!");
                     res.render('admin/customer_add',

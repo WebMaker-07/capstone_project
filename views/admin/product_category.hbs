@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="auth/customers">
+                    <a href="/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -165,7 +165,7 @@
 
                     <form class="mb-3 w-50" role="search" id="categoryForm" action="/auth/product-categories" method="POST">
                         <div class="input-group">
-                            <input class="form-control me-2" type="text" name="category_name" id="category_name" placeholder="Product Category" value="{{category_name}}">
+                            <input class="form-control me-2" type="text" name="category_name" id="category_name" placeholder="Product Category" value="{{data.category_name}}">
                             <input type="hidden" name="category_id" value="{{category_id}}">
                             <button class="btn btn-warning text-dark  me-2" type="submit" id="submitBtn">Add<i class="bi {{#if category_id}}bi-pencil-square{{else}}bi-plus-square-fill{{/if}}"></i>
                             </button>

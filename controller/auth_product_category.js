@@ -30,61 +30,56 @@ const db = mysql.createConnection(
         });
     }
         // update category
-    exports.updateCategory = (req, res) => {
-      const { category_id, category_name } = req.body;
-      db.query(
-          'UPDATE products_category SET category_name = ? WHERE category_id = ?',
-          [category_name, category_id],
-          (err, result) => {
+        exports.updateCategory = (req, res) => {
+          const { category_name } = req.body;
+          const category_id = req.params.category_id;
+          db.query(
+            'UPDATE products_category SET category_name = ? WHERE category_id = ?',
+            [category_name, category_id],
+            (err, result) => {
               if (err) {
-                  console.log(err);
-                  res.status(500).send('An error occurred while updating the category.');
+                console.log(err);
+                res.status(500).send('An error occurred while updating the category.');
               } else {
-                  console.log(result);
-                  res.redirect('/admin/product_category');
+                console.log(result);
+                res.redirect('/admin/product_category');
               }
-          }
-      );
-    }
+            }
+          );
+        }
+        
 
     // add or update category
-    exports.addProductcat = (req,res)=>{
+    exports.addProductcat = (req, res) => {
       const { category_name } = req.body;
-      db.query('INSERT INTO products_category SET ?',
-      {
+      db.query(
+        'INSERT INTO products_category SET ?',
+        {
           category_name: category_name,
           store_id: 1 // add default value for store_id
-      },
-      (err,result)=>
-      {
-              // console.log(db);
-              if(err)
-                  {
-                      console.log('Error Message: '+err);
-                  }
-              else
-                  {
-                      db.query('SELECT * FROM products_category',(err,data)=>
-                          {
-                              output= data[0];
-                              if(err)
-                                  {
-                                      console.log('Error Message: '+err);
-                                  }
-                              else
-                                  {
-                                      res.render('admin/product_category',
-                                          {
-                                              data: output,
-                                              message: "product added successfully!",
-                                              color: "alert-success"
-                                          });
-                                  }
-                          });
-                  }
-          });
+        },
+        (err, result) => {
+          if (err) {
+            console.log('Error Message: ' + err);
+            res.status(500).send('An error occurred while adding the category.');
+          } else {
+            db.query('SELECT * FROM products_category', (err, data) => {
+              if (err) {
+                console.log('Error Message: ' + err);
+                res.status(500).send('An error occurred while retrieving the list of categories.');
+              } else {
+                res.render('admin/product_category', {
+                  data: data,
+                  message: 'Product added successfully!',
+                  color: 'alert-success'
+                });
+              }
+            });
+          }
+        }
+      );
     };
-        
+            
 
     
     

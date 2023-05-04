@@ -17,7 +17,8 @@ router.post('/search_customer', admin_controller.search_customer);
 router.get('/product-categories',product_cat.viewProductCat);
 router.post('/product-categories',product_cat.addProductcat);
 router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
-router.get('/auth/updatecategory/:category_id', product_cat.updateCategory);
+router.get('/auth/update_category/:category_id', product_cat.updateCategory);
+router.post('/auth/update_category/:category_id', product_cat.updateCategory);
 
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);
@@ -27,6 +28,9 @@ router.get('/deleteProduct/:product_id',product_list.deleteProductList);
 //REGISTER
 router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
+
+//login
+router.get('/login_admin',login.viewuser);
 
 //PRODUCT
 // router.get('product-list',product_cat.viewProduct);

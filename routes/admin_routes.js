@@ -69,7 +69,10 @@ router.get('/dashboard',(request,response)=>{
     })
 
     
-    
+    //ORDER FUNCTION
+    router.get('/order-list',(request,response)=>{
+        response.render('admin/order');
+    })
 
 
 module.exports = router;

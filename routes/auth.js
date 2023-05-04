@@ -10,17 +10,15 @@ const product = require('../controller/auth_product');
 //CUSTOMERS
 router.get('/customers',admin_controller.view_customer);
 router.post('/add_customer',admin_controller.add_customer);
-router.get('/customer_update/:customer_id', admin_controller.update_form);
-router.post('/update_customer', admin_controller.update_customer);
 router.get('/customer_delete/:customer_id', admin_controller.customer_delete);
 router.post('/search_customer', admin_controller.search_customer);
 
 //PRODUCT CATEGORY
 router.get('/product-categories',product_cat.viewProductCat);
-router.post('/add_category',product_cat.addProductcat);
+router.post('/product-categories',product_cat.addProductcat);
 router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
-router.get('/auth/updateProductCat/:category_id', product_cat.updateProductCat);
-router.post('/auth/updateProductCat/:category_id', product_cat.updateProductCatSubmit);
+router.get('/auth/update_category/:category_id', product_cat.updateCategory);
+router.post('/auth/update_category/:category_id', product_cat.updateCategory);
 
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);
@@ -33,6 +31,9 @@ router.post('/search_product',product_list.searchProduct);
 //REGISTER
 router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
+
+//login
+router.get('/login_admin',login.viewuser);
 
 //PRODUCT
 // router.get('product-list',product_cat.viewProduct);

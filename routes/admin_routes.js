@@ -55,9 +55,6 @@ router.get('/dashboard',(request,response)=>{
 
 
     //STOCK ROUTES
-    // router.get('/product-stock-in',(request,response)=>{
-    //     response.render('admin/stock_in');
-    // })
     router.get('/add_stock',(request,response)=>{
         response.render('admin/stock_in_add');
     })
@@ -65,6 +62,11 @@ router.get('/dashboard',(request,response)=>{
      router.get('/product-stock-in', product.viewStockList);
      router.post('/search_product', product.seacrhProduct);
      router.post('/process_stock', product.processStock);
+
+     //CUSTOMER DASHBOARD
+     router.get('/store1/index',(request,response)=>{
+        response.render('customer/home');
+    })
     
     
 

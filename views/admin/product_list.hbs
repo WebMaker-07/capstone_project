@@ -43,7 +43,7 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="auth/product-list">
+                            <a class="active" href="auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
@@ -57,7 +57,7 @@
                         </li>
                           <li>
                             
-                            <a class="active" href="auth/product-stock-in">
+                            <a class="active" href="/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -154,15 +154,19 @@
                 <div class="px-5">
                     <div class="d-flex">
                       <h3>List of Products</h3>
-                         <form class="ml-auto" role="search">
+                         <form action="/auth/search_product" method="POST" class="ml-auto" role="search">
                             <div class="input-group">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                                <input class="form-control me-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                              </div>
                         </form>
                     </div>  
                     <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/product_add" >Add <i class="bi bi-plus-square-fill"></i></a></h4> 
-
+                    {{#if message}}
+                        <h4 class="alert {{color}}">
+                            {{message}}
+                        </h4>
+                    {{/if}}
                     <div class="table-responsive ">
                         <table class="table table-success table-striped table-bordered  ">
                                                 <thead>
@@ -186,8 +190,8 @@
                                                         <td>{{this.actual_price}}</td>
                                                         <td>{{this.date_update}}</td>
                                                         <td>
-                                                            <a  href="/product_update" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
-                                                            <a href="/auth/deleteProduct/{{this.product_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')><i class="bi bi-trash"></i></i> Delete</a>
+                                                            <a  href="/auth/product_update/{{this.product_id}}" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i> Update</a>
+                                                            <a href="/auth/deleteProduct/{{this.product_id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="bi bi-trash"></i></i> Delete</a>
                                                         </td>
                                                     </tr>
                                                     {{/each}}

@@ -17,19 +17,26 @@ router.post('/search_customer', admin_controller.search_customer);
 
 //PRODUCT CATEGORY
 router.get('/product-categories',product_cat.viewProductCat);
-router.post('/add_category',product_cat.addProductcat);
+router.post('/product-categories',product_cat.addProductcat);
 router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
-router.get('/auth/updateProductCat/:category_id', product_cat.updateProductCat);
-router.post('/auth/updateProductCat/:category_id', product_cat.updateProductCatSubmit);
+router.get('/auth/update_category/:category_id', product_cat.updateCategory);
+router.post('/auth/update_category/:category_id', product_cat.updateCategory);
 
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);
 router.post('/product_add',product_list.addProductList);
+router.get('/product_update/:product_id',product_list.updateProductForm);
+router.post('/update_product',product_list.updateProduct);
 router.get('/deleteProduct/:product_id',product_list.deleteProductList);
+router.post('/search_product',product_list.searchProduct);
 
 //REGISTER
 router.get('/register_admins',register.viewuser);
 router.post('/register_admin',register.adduser);
+
+//login
+router.get('/login_admin',login.viewuser);
+// router.post('/login_admin',login.loginCheck);
 
 //PRODUCT
 // router.get('product-list',product_cat.viewProduct);

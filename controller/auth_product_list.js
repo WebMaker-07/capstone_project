@@ -12,7 +12,6 @@ const db = mysql.createConnection(
         db.query('SELECT * FROM products p JOIN products_category pc ON p.category_id = pc.category_id;',
         (error,result)=>
         {
-            console.log(result)
             if(error)
             {
                 console.log("Error Message : " + error);
@@ -30,15 +29,18 @@ const db = mysql.createConnection(
 
     
     exports.addProductList = (req,res)=>{
-        const { product_id, product_name, category_id, suggested_price, actual_price, product_status } = req.body;
+        const { barcode, product_name, category_id, suggested_price, actual_price, standard_qty, product_details} = req.body;
+        let store_id = 2;
         db.query('INSERT INTO products set ?',
         {
-            product_id: product_id,
+            barcode: barcode,
+            store_id: store_id,
             product_name: product_name,
             category_id: category_id,
             suggested_price: suggested_price,
             actual_price: actual_price,
-            product_status: product_status            
+            standard_qty: standard_qty,
+            product_details: product_details
         },
         (err,result)=>
         {
@@ -49,9 +51,9 @@ const db = mysql.createConnection(
                     }
                 else
                     {
-                        db.query('CALL get_products_with_category_name()',(err,data)=>
+                        db.query('SELECT * FROM products',(err,output)=>
                             {
-                                output= data[0];
+                                
                                 if(err)
                                     {
                                         console.log('Error Message: '+err);
@@ -62,7 +64,7 @@ const db = mysql.createConnection(
                                             {
                                                 data: output,
                                                 message: "Customer added successfully!",
-                                                color: "alert-success"
+                                                color: "alert-info"
                                             });
                                     }
                             });
@@ -83,9 +85,8 @@ const db = mysql.createConnection(
                 console.log('Error Message: ' + err);
               } else {
                 res.render('admin/product_list', {
-                  title: "List of Product_List",
                   data: delData,
-                  message: "Product  deleted successfully!",
+                  message: "Product deleted successfully!",
                   color: "alert-danger"
                 });
               }
@@ -93,3 +94,72 @@ const db = mysql.createConnection(
           }
         });
       };
+    
+    exports.updateProductForm = (req, res) => {
+        const id = req.params.product_id;
+        db.query('SELECT * FROM products where product_id = ?', id, (err,result)=>
+            {
+                if(err)
+                    {
+                        console.log('Error message: ' + err);
+                    }
+                else
+                    {
+                        res.render('admin/product_update',{data:result[0]});
+                    }
+            })
+    }
+
+    exports.updateProduct = (req,res)=>{
+        const {product_id, barcode, product_name, product_details, actual_price, suggested_price, standard_qty, category_id} = req.body;
+        db.query('UPDATE products set barcode = ?, product_name = ?,product_details = ?,actual_price = ?,suggested_price = ?,standard_qty = ?,category_id = ? WHERE product_id = ?',
+            [barcode,product_name,product_details,actual_price,suggested_price,standard_qty,category_id,product_id],
+            (err,result)=>
+                {
+                    if(err)
+                        {
+                            console.log('Error message: ' + err);
+                        }
+                    else
+                        {
+                            db.query('SELECT * FROM products',(err,output)=>
+                                {
+                                    if(err)
+                                        {
+                                            console.log('Error message: ' + err);
+                                        }
+                                    else
+                                        {
+                                            res.render('admin/product_list',
+                                                {
+                                                    message:"Product updated successfully!",
+                                                    color: "alert-info",
+                                                    data: output
+                                                });
+                                        }
+                                });
+                        }
+                });
+    }
+
+    exports.searchProduct=(req,res)=>{
+        const {search} = req.body;
+        db.query('SELECT * FROM products where product_name = ?',search,(err,result)=>
+            {
+                if(result==0)
+                {
+                    res.render('admin/product_list',
+                        {
+                            message: "Product not existed!",
+                            color: "alert-warning"
+                        });
+                }
+            else
+                {
+                    res.render('admin/product_list',
+                        {
+                            data:result
+                        });
+                }
+            })
+    }

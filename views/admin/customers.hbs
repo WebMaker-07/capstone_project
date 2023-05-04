@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li >
-                    <a class="active" href="/customers">
+                    <a class="active" href="/auth/customers">
                        <i class="fas fa-users"></i>
                         Customers
                     </a>
@@ -43,21 +43,21 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/product-list">
+                            <a href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
                         </li>
                         <li>
                             
-                            <a href="auth/product-categories">
+                            <a href="/auth/product-categories">
                                <i class="fas fa-tags"></i>
                                 Product Category
                             </a>
                         </li>
                           <li>
                             
-                            <a  href="/product-stock-in">
+                            <a href="/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -154,7 +154,7 @@
                <div class="px-5">
                     <div class="d-flex">
                       <h3>List of Customers</h3>
-                         <form action="/auth/search_customer" method="POST" class="ml-auto" role="search">
+                        <form action="/auth/search_customer" method="POST" class="ml-auto" role="search">
                             <div class="input-group">
                                 <input class="form-control me-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
@@ -170,7 +170,6 @@
                     <table class="table table-success table-striped table-bordered">
                         <thead>
                             <th>Customer ID</th>
-                            <th>Store ID</th>
                             <th>Full Name</th>
                             <th>Contact</th>
                             <th>Address</th>
@@ -181,7 +180,6 @@
                             {{#each data}}
                             <tr>
                                 <td>{{this.customer_id}}</td>
-                                <td>{{this.store_id}}</td>
                                 <td>{{this.last_name}}, {{this.first_name}} </td>
                                 <td>{{this.contact}}</td>
                                 <td>{{this.address}}</td>

@@ -24,31 +24,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
-            <li class="nav-item">
+            {{!-- <li class="nav-item">
                 <form class="d-flex" role="search">
                     <input class="form-control " type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-            </li>
+            </li> --}}
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
+             <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="#">About</a>
+            </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Products</a>
             </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categories
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Category 1</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
             </li>
             <li class="nav-item">
-            <a href="/customer_login" class=" btn btn-sm btn-dark">Login</a>
+            <a href="/customer_login" class=" btn  btn-warning"> <i class="bi bi-box-arrow-in-left"></i>Login</a>
+            <a href="/customer_login" class=" btn  btn-success"> <i class="bi bi-box-arrow-in-left"></i>Register</a>
+            
             </li>
             
         </ul>
@@ -65,7 +70,7 @@
                 <div style="padding-top:100px; padding-bottom: 100px" >
                     <h2 style="font-size: 5em"> Welcome to Store Name</h2>
                     <p style="font-style: italic;">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, nisi."</p>
-                        <a href="" class="btn btn-dark" style="font-size:25px"><i class="bi bi-cart4" ></i>  Shop Now </a>  
+                        <a href="" class="btn btn-outline-warning" style="font-size:25px"><i class="bi bi-cart4" ></i>  Shop Now </a>  
                 </div>
         </div>
     </div>
@@ -320,7 +325,7 @@
  <footer class="text-bg-dark ">
    <div class="container pt-5 pt-3">
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-8">
             <h3>Find us</h3>
             <p>Lorem, ipsum dolor sit amet consectetur 
               adipisicing elit. Exercitationem placeat officia 
@@ -339,8 +344,14 @@
             <p class="border border-2 border-info btn btn-info rounded-5 text-center ">
               <a href="" class="p-2 text-decoration-none text-dark"><i class="bi bi-twitter"></i> Twitter </a>
             </p>
-           
-            
+        </div>
+        <div class="col-lg-2">
+            <h4>Useful Links</h4>
+            <h6><a href="" class="text-decoration-none text-warning"> Home</a></h6>
+             <h6><a href="" class="text-decoration-none text-warning"> About us</a></h6>
+             <h6> <a href="" class="text-decoration-none text-warning"> Community</a></h6>
+             <h6> <a href="" class="text-decoration-none text-warning"> Privacy Policy</a></h6>
+             <h6> <a href="" class="text-decoration-none text-warning"> Terms and Conditions</a></h6>
         </div>
       </div>
    </div>

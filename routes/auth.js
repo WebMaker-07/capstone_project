@@ -36,6 +36,7 @@ router.post('/register_admin',register.adduser);
 
 //login
 router.get('/login_admin',login.viewuser);
+// router.post('/login_admin',login.loginCheck);
 
 //PRODUCT
 // router.get('product-list',product_cat.viewProduct);

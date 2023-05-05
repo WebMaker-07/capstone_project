@@ -115,7 +115,8 @@
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Product List</a></h3>
+                    <h3 class="location px-5 pt-3"> <a href="/order-list">Orders List/
+                    <a href="">Adding Order</a> </h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -153,10 +154,10 @@
             <div class="main-content container">
                 <div class="px-5">
                     <div class="d-flex">
-                      <h3>Add Stock</h3>
+                      <h3>Process Order</h3>
                     </div>  
                     <div>
-                        <form class="w-75 mb-3" action="/search_product" method="post">
+                        <form class="w-75 mb-3" action="/search_products" method="post">
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Search" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
@@ -166,10 +167,11 @@
                     </div>
          
                    <div class="table-responsive table-sm ">
-                        <table class="table table-success table-striped table-bordered" id="prodTable">
+                        <table class="table table-success table-striped table-bordered w-50" id="prodTable" 
+                        style="font-size:15px">
                              <thead>
-                                <th scope="col">Product ID</th>
-                               <th scope="col">Product Name</th>
+                                <th scope="col">ID</th>
+                               <th scope="col-" style="width: 100px;">Product Name</th>
                                <th scope="col">Description</th>
                                <th scope="col">Category</th>
                                <th scope="col">QTY</th>
@@ -183,7 +185,7 @@
                                 <td id="product_name">{{this.product_name}}</td>
                                 <td id="details">{{this.product_details}}</td>
                                 <td id="category_name">{{this.category_name}}</td>
-                                 <form action="/process_stock" method="post">
+                                 <form action="" method="post">
                                     <td>
                                         <input type="hidden" name="product_id" value="{{this.product_id}}">
                                         <input type="number" name="quantity" id="quantity">
@@ -246,7 +248,7 @@
       })
       function cancelRow(row) {
          row.remove();
-         window.location.href = ('/add_stock')
+         window.location.href = ('/adding_orders')
             }       
            
     </script> 

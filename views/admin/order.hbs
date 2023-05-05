@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <nav id="sidebar" class="rounded-5">
+         <nav id="sidebar" class="rounded-5">
             <div class="sidebar-header">
                 <h3>Store Web Management</h3>
                 <strong>SWM</strong>
@@ -36,14 +36,14 @@
                 </li>
                 <li>
                
-                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
+                    <a href="#pageTransac" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
                         <i class="bi bi-bar-chart-line"></i>
                         Products
                     </a>
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/auth/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
@@ -57,7 +57,7 @@
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a  href="/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -67,13 +67,13 @@
        
                
                 <li > 
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-cart4"></i>
                        Order
                     </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="/order-list">
+                            <a  class="active" href="/order-list">
                                 <i class="fas fa-shipping-fast"></i> 
                                 Orders
                             </a>
@@ -115,7 +115,7 @@
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Product List</a></h3>
+                    <h3 class="location px-5 pt-3"> <a href="">Orders List</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -153,66 +153,46 @@
             <div class="main-content container">
                 <div class="px-5">
                     <div class="d-flex">
-                      <h3>Add Stock</h3>
-                    </div>  
-                    <div>
-                        <form class="w-75 mb-3" action="/search_product" method="post">
+                      <h3>List of Orders</h3>
+                         <form action="/auth/search_product" method="POST" class="ml-auto" role="search">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search" name="search" >
-                                 <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                                
+                                <input class="form-control me-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                              </div>
                         </form>
-                    </div>
-         
-                   <div class="table-responsive table-sm ">
-                        <table class="table table-success table-striped table-bordered" id="prodTable">
-                             <thead>
-                                <th scope="col">Product ID</th>
-                               <th scope="col">Product Name</th>
-                               <th scope="col">Description</th>
-                               <th scope="col">Category</th>
-                               <th scope="col">QTY</th>
-                                <th scope="col">Action</th>
-                             </thead>
-
-                             <tbody>
-                                {{#each data}}
-                                <tr>
-                                <td id="product_id">{{this.product_id}}</td>
-                                <td id="product_name">{{this.product_name}}</td>
-                                <td id="details">{{this.product_details}}</td>
-                                <td id="category_name">{{this.category_name}}</td>
-                                 <form action="/process_stock" method="post">
-                                    <td>
-                                        <input type="hidden" name="product_id" value="{{this.product_id}}">
-                                        <input type="number" name="quantity" id="quantity">
-                                    </td>
-                                <td>
-                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
-                                     <i class="bi bi-plus-square-fill"></i> Add
-                               </form>
-                                 
-                                    
-                                    </button>
-                                     <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
-                                     class="btn btn-outline-danger btn-sm">
-                                        <i class="bi bi-plus-square-fill"></i> Cancel
-                                    
-                                    </button>
-                                    
-                                </td>
-                                </tr>
-                            {{/each}}
+                    </div>  
+                    <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/adding_orders" >Add Order <i class="bi bi-plus-square-fill"></i></a></h4> 
+                    {{#if message}}
+                        <h4 class="alert {{color}}">
+                            {{message}}
+                        </h4>
+                    {{/if}}
+                    <div class="table-responsive ">
+                        <table class="table table-success table-striped table-bordered">
+                              <thead>
+                                  <th scope="col">Order Reference #</th>
+                                  <th scope="col">Customer Name</th>
+                                  <th scope="col">Total Amount</th>
+                                  <th scope="col">Date Purchased</th>
+                                  <th scope="col">Purchased</th>
+                                  <th scope="col">Action</th>
+                               </thead>
+                              <tbody>
+                                  <tr>
+                                     <td>S05052023-0001</td>
+                                     <td>Customer 1</td>
+                                     <td>&#8369; 123.00</td>
+                                     <td>May 5, 2023</td>
+                                     <td>admin</td>
+                                     <td>
+                                       <a href="" class="btn btn-sm btn-primary">View</a>
+                                     </td>
+                                  </tr>                  
                               </tbody>
-                          </table>
-
+                        </table>
                     </div>
-                 
-                     
-                 
+                    
                </div>
-                
                 
                 
             </div>
@@ -233,23 +213,15 @@
             });
         });
         
-
-      document.getElementById('stockProduct').addEventListener('click',function(){
-        let productId = document.getElementById('product_id').innerHTML;
-        let productName = document.getElementById('product_name').innerHTML;
-        let details = document.getElementById('details').innerHTML;
-        let categoryName = document.getElementById('category_name').innerHTML;
-        let quantity = document.getElementById('quantity').value;
-
-
-        alert(quantity);
-      })
-      function cancelRow(row) {
-         row.remove();
-         window.location.href = ('/add_stock')
-            }       
-           
+          
     </script> 
+    {{!-- <script>
+         const username = sessionStorage.getItem("username");
+            alert(username);
 
+            // Insert the username into the welcome message
+            document.getElementById("welcomeMessage").innerHTML = `Welcome, ${username}!`;
+            document.getElementById("greeting").innerHTML = username;
+    </script> --}}
 </body>
 </html>

@@ -1,6 +1,7 @@
 let express = require('express');
 const router = express.Router();
 const product = require('../controller/auth_product');
+const order = require('../controller/auth_order');
 
 router.get('/',(request,response)=>{
     response.render('index');
@@ -69,7 +70,17 @@ router.get('/dashboard',(request,response)=>{
     })
 
     
-    
+    //ORDER FUNCTION
+    router.get('/order-list',(request,response)=>{
+        response.render('admin/order');
+    });
+    router.get('/adding_orders',(request,response)=>{
+        response.render('admin/order_add');
+    });
+    router.post('/search_products', order.seacrhProduct);
+
+
+
 
 
 module.exports = router;

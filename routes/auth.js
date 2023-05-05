@@ -44,4 +44,7 @@ router.get('/login_admin',login.viewuser);
 
 //STOCK METHOD
 //  router.get('/product-stock-in', product.viewStockList);
+
+//login store_account
+router.post('/store_login',login.store_login);
 module.exports = router;

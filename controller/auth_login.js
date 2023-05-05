@@ -28,3 +28,43 @@ const db = mysql.createConnection(
             
         });
     }
+
+    //login for store_account
+    exports.store_login = (req,res)=> {
+        const {user_email, user_password} = req.body;
+        if(user_email == "" || user_password == "")
+            {
+                res.render('login_admin',
+                    {
+                        message:'Fields are empty, Please try again!',
+                        color:"alert-danger"
+                    });
+            }
+        db.query('SELECT * FROM stores WHERE user_email = ?',user_email,
+            (err,result)=>
+                {
+                    if(!result[0])
+                        {
+                            res.render('login_admin',
+                                {
+                                    message:'Invalid credentials, Please try again!',
+                                    color:"alert-danger"
+                                });
+                        }
+                    else if(result[0].user_password != user_password)
+                        {
+                            res.render('login_admin',
+                                {
+                                    message:'Invalid credentials, Please try again!',
+                                    color:"alert-danger"
+                                });
+                        }
+                    else
+                        {
+                            res.render('admin/home',
+                                {
+                                    user:result[0]
+                                });
+                        }
+                });
+    }

@@ -14,6 +14,7 @@ router.get('/register_admin',(request,response)=>{
 
 // routes in admin dashboards
 router.get('/dashboard',(request,response)=>{
+    
     response.render('admin/home');
 })
     // routes for customer function

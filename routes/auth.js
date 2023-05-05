@@ -7,7 +7,7 @@ const register = require('../controller/auth_admin_register');
 const login = require('../controller/auth_login');
 const product = require('../controller/auth_product');
 
-//CUSTOMERS
+// ADMIN - CUSTOMERS ACCOUNT
 router.get('/customers',admin_controller.view_customer);
 router.post('/add_customer',admin_controller.add_customer);
 router.get('/customer_update/:customer_id', admin_controller.update_form);
@@ -19,8 +19,7 @@ router.post('/search_customer', admin_controller.search_customer);
 router.get('/product-categories',product_cat.viewProductCat);
 router.post('/product-categories',product_cat.addProductcat);
 router.get('/deleteProductCat/:category_id', product_cat.deleteProductCat);
-router.get('/auth/update_category/:category_id', product_cat.updateCategory);
-router.post('/auth/update_category/:category_id', product_cat.updateCategory);
+router.post('/update_category', product_cat.updateCategory);
 
 //PRODUCT LIST
 router.get('/product-list',product_list.viewProductList);

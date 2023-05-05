@@ -169,7 +169,7 @@
                    <div class="table-responsive ">
                         <table class="table table-success table-striped table-bordered  ">
                            <thead>
-                               <th>#</th>
+                           
                                <th scope="col">Stock #</th>
                                <th scope="col">Product Name</th>
                                <th scope="col">Description</th>
@@ -178,10 +178,10 @@
                             <tbody>
                               {{#each data}}
                                 <tr>
-                                    <td id="stock_id">{{this.stock_in_id}}</td>
-                                    <td id="product_name">{{this.product_name}}</td>
-                                    <td id="details">{{this.product_details}}</td>
-                                    <td id="category_name">{{this.quantity}}</td>
+                                    <td>{{this.stock_id}}</td>
+                                    <td >{{this.product_name}}</td>
+                                    <td>{{this.product_details}}</td>
+                                    <td>{{this.quantity}}</td>
                                 </tr>
                             {{/each}}
                             </tbody>                

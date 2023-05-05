@@ -46,18 +46,9 @@ router.get('/dashboard',(request,response)=>{
         response.render('admin/product_category');
     })
 
-    router.get('/customer_login',(request,response)=>{
-        response.render('customer/customer_login');
-    })
-    router.get('/index',(request,response)=>{
-        response.render('customer/home');
-    })
-
+   
 
     //STOCK ROUTES
-    // router.get('/product-stock-in',(request,response)=>{
-    //     response.render('admin/stock_in');
-    // })
     router.get('/add_stock',(request,response)=>{
         response.render('admin/stock_in_add');
     })
@@ -65,6 +56,18 @@ router.get('/dashboard',(request,response)=>{
      router.get('/product-stock-in', product.viewStockList);
      router.post('/search_product', product.seacrhProduct);
      router.post('/process_stock', product.processStock);
+
+     //CUSTOMER DASHBOARD
+     router.get('/store1/index',(request,response)=>{
+        response.render('customer/home');
+    })
+    router.get('/store1/login',(request,response)=>{
+        response.render('customer/customer_login');
+    })
+    router.get('/store1/register',(request,response)=>{
+        response.render('customer/customer_register');
+    })
+
     
     
 

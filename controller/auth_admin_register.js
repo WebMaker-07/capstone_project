@@ -29,9 +29,9 @@ const db = mysql.createConnection(
         });
     }
 
-    exports.adduser = (req,res)=>{
+
+        exports.adduser = (req,res)=>{
         const { store_name, user_name, main_admin_firstname, main_admin_lastname, user_password, user_email,  } = req.body;
-    
         // Check if email already exists
         db.query('SELECT * FROM stores WHERE user_email = ?', [user_email], (err, result) => {
             if (err) {

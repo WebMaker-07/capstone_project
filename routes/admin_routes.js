@@ -68,6 +68,9 @@ router.get('/dashboard',(request,response)=>{
     router.get('/store1/register',(request,response)=>{
         response.render('customer/customer_register');
     })
+    router.post('/store1/register',(request,response)=>{
+        response.render('customer/customer_register');
+    })
 
     
     //ORDER FUNCTION

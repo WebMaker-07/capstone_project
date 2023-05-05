@@ -73,7 +73,7 @@
                     </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="">
+                            <a href="/order-list">
                                 <i class="fas fa-shipping-fast"></i> 
                                 Orders
                             </a>
@@ -250,6 +250,11 @@
         document.getElementById('submitBtn').classList.add('d-none');
         document.getElementById('updateBtn').classList.remove('d-none');
     }
+
+        // Change the button text to "Cancel Update"
+            const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
+            document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
+            res.redirect('/admin/product_category');
 
             function cancelUpdate() {
         // Reset the form to its original state

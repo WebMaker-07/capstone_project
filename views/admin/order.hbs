@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- Bootstrap CSS CDN -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
    <!-- Our Custom CSS -->
    <link rel="stylesheet"  href="/css/admin.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
    <!-- Font Awesome JS -->
    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-   <style>
-   
-   </style>
     <title>Sidebars</title>
 </head>
 <body>
@@ -27,7 +23,7 @@
             </div>
             <ul class="list-unstyled components">
                 <li >
-                    <a href="/dashboard" class="active">
+                    <a href="/dashboard">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard
                     </a>
@@ -47,7 +43,7 @@
                     <ul class="collapse list-unstyled" id="pageTransac">
                         <li>
                             
-                            <a href="/auth/product-list">
+                            <a  href="/auth/product-list">
                             <i class="fas fa-list"></i>
                                 List of Products
                             </a>
@@ -61,7 +57,7 @@
                         </li>
                           <li>
                             
-                            <a href="/product-stock-in">
+                            <a  href="/product-stock-in">
                                <i class="fas fa-box-open"></i>
                                 Stock In
                             </a>
@@ -71,13 +67,13 @@
        
                
                 <li > 
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                         <i class="bi bi-cart4"></i>
                        Order
                     </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="/order-list">
+                            <a  class="active" href="/order-list">
                                 <i class="fas fa-shipping-fast"></i> 
                                 Orders
                             </a>
@@ -119,7 +115,7 @@
                         <i class="fas fa-bars"></i> <span></span>
                 </button>
              
-                    <h3 class="location px-5 pt-3"> <a href="">Dashboard</a></h3>
+                    <h3 class="location px-5 pt-3"> <a href="">Orders List</a></h3>
             
             
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
@@ -131,8 +127,7 @@
                         <ul class="nav navbar-nav ml-auto"> 
                             <li class="nav-item active">
                                 <a href="#" class="nav-link">
-                                <input type="text" name="store_id" id="store_id" value="{{user.store_id}}">
-                                  <p>Hi <span name="store_name" id="store_name">{{user.main_admin_firstname}}</span></p>
+                                  <p>Hi</p>
                                 </a>
                             </li>
                             <li class="nav-item active">
@@ -155,94 +150,55 @@
                 </div>
             </nav>
             {{!-- Main Content --}}
-            <div class="main-content container-fluid">
-                <div class="row px-5">
-                    <div class="col  d-flex boxes greenBox">
-                        <i style="font-size:80px ; margin-right:20px;"class="fas fa-users"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Customer</p>
-                        </div>
-                    </div>
-                    <div class="col d-flex boxes orangeBox">
-                        <i style="font-size:80px ; margin-right:20px;"class="fas fa-cubes"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Products On Hand</p>
-                        </div>
-                    </div>
-                     <div class="col d-flex boxes redBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-graph-down-arrow"></i>
-                        <div>
-                            <h2>300</h2>
-                            <p>Products Critical</p>
-                        </div>
-                    </div>
-                    <div class="col d-flex boxes violetBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-cart4"></i>
-                        <div>
-                            <h2>&#8369;14,340</h2>
-                            <p>Daily Sales</p>
-                        </div>
-                    </div>
-                    <div class="col d-flex boxes blueBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-bag-x"></i>
-                        <div>
-                            <h2>&#8369;15,000</h2>
-                            <p>Total Unpaid Order</p>
-                        </div>
-                    </div>
-                      <div class="col d-flex boxes yellowBox">
-                        <i style="font-size:80px ; margin-right:20px;" class="bi bi-bar-chart-line"></i>
-                        <div>
-                            <h2>&#8369;3,920</h2>
-                            <p>Profit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row gap-3 px-5 mt-5">
-                    <div class="col border border-1 border-dark-subtle bg-light-subtle ">
-                        <h4 class="pt-2 "><i class="bi bi-box-seam"></i> HIGHEST SELLING PRODUCTS</h4><hr>
-                        <table class="table table-danger table-striped table-hover">
-                            <thead>
-                                <th>Name</th>
-                                <th>Total Sold</th>
-                                <th>Total Quantity</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Mantika</td>
-                                    <td>20</td>
-                                    <td>100</td>
-                                </tr>
-                            </tbody>
+            <div class="main-content container">
+                <div class="px-5">
+                    <div class="d-flex">
+                      <h3>List of Orders</h3>
+                         <form action="/auth/search_product" method="POST" class="ml-auto" role="search">
+                            <div class="input-group">
+                                <input class="form-control me-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                             </div>
+                        </form>
+                    </div>  
+                    <h4 class="ml-auto px-4 btn btn-warning text-dark"><a href="/adding_orders" >Add Order <i class="bi bi-plus-square-fill"></i></a></h4> 
+                    {{#if message}}
+                        <h4 class="alert {{color}}">
+                            {{message}}
+                        </h4>
+                    {{/if}}
+                    <div class="table-responsive ">
+                        <table class="table table-success table-striped table-bordered">
+                              <thead>
+                                  <th scope="col">Order Reference #</th>
+                                  <th scope="col">Customer Name</th>
+                                  <th scope="col">Total Amount</th>
+                                  <th scope="col">Date Purchased</th>
+                                  <th scope="col">Purchased</th>
+                                  <th scope="col">Action</th>
+                               </thead>
+                              <tbody>
+                                  <tr>
+                                     <td>S05052023-0001</td>
+                                     <td>Customer 1</td>
+                                     <td>&#8369; 123.00</td>
+                                     <td>May 5, 2023</td>
+                                     <td>admin</td>
+                                     <td>
+                                       <a href="" class="btn btn-sm btn-primary">View</a>
+                                     </td>
+                                  </tr>                  
+                              </tbody>
                         </table>
                     </div>
-                     <div class="col border border-1 border-dark-subtle bg-light-subtle ">
-                        <h4 class="pt-2 "><i class="bi bi-box-seam"></i> LATEST SALE</h4><hr>
-                        <table class="table table-primary table-striped table-hover ">
-                            <thead>
-                                <th>#</th>
-                                <th>Product Name</th>
-                                <th>Date</th>
-                                <th>Total Sale</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mantika</td>
-                                    <td>04-20-2023</td>
-                                    <td>&#8369; 100.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    
+               </div>
+                
+                
             </div>
         </div>
     </div>
-    {{!-- getting the value of store_id and store_name --}}
-       <script src="javascript/store.js"></script>
+    <script src="js/index.js"></script>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -250,7 +206,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  <script type="text/javascript">
+      <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');

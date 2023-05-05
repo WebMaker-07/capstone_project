@@ -1,11 +1,20 @@
 const express = require('express');
 const router = express.Router();
+//CUSTOMER CONTROLLER
+const c_register = require('../controller/auth_customer_register')
+
+//ADMIN CONTROLLER
 const product_cat = require('../controller/auth_product_category');
 const admin_controller = require('../controller/auth_account');
 const product_list = require('../controller/auth_product_list');
 const register = require('../controller/auth_admin_register');
 const login = require('../controller/auth_login');
 const product = require('../controller/auth_product');
+
+
+//CUSTOMER - REGISTER
+router.get('/store1/register',c_register.view_customer_register);
+router.post('/store1/register',c_register.register_customer);
 
 // ADMIN - CUSTOMERS ACCOUNT
 router.get('/customers',admin_controller.view_customer);

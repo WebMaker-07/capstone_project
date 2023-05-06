@@ -157,7 +157,7 @@
                       <h3>Process Order</h3>
                     </div>  
                     <div>
-                        <form class="w-50 mb-3" action="/search_products" method="post">
+                        <form class="w-75 mb-3" action="/search_products" method="post">
                             <div class="input-group">
                                 <input class="form-control " type="text" placeholder="Type Product Name" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
@@ -167,8 +167,8 @@
                     </div>
          
                    <div class="table-responsive table-sm ">
-                        <table class="table table-success table-striped table-bordered table-sm w-50" id="prodTable" 
-                        style="font-size:13px; ">
+                        <table class="table table-success table-striped table-bordered table-sm " id="prodTable" 
+                       >
                              <thead>
                                 <th scope="col">ID</th>
                                <th scope="col" class="w-25">Product Name</th>
@@ -183,11 +183,11 @@
                                 <td>{{this.product_id}}</td>
                                 <td>{{this.product_name}}</td>
                                 <td>{{this.product_details}}</td>
-                                 <form id="products" method="post" class="w-50">
+                                 <form id="products" action="/addOrder" method="post" class="w-50">
                                     <td>
-                                        <input type="text" name="product_name" id="product_name" value="{{this.product_name}}">
-                                        <input type="text" name="product_id" id="product_id" value="{{this.product_id}}">
-                                        <input type="number" class="w-100" name="quantity" id="quantity">
+                                        <input type="hidden" name="product_name" id="product_name" value="{{this.product_name}}">
+                                        <input type="hidden" name="product_id" id="product_id" value="{{this.product_id}}">
+                                        <input type="number" required class="w-100" name="quantity" id="quantity">
                                     </td>
                                 <td>
                                     <button type="submit" id="add" class="btn btn-outline-success btn-sm w-100">
@@ -207,7 +207,7 @@
                             {{/each}}
                               </tbody>
                           </table>
-
+                       
                     </div>
                  
                      
@@ -236,25 +236,32 @@
            
     </script> 
     <script>
-        
-      document.getElementById('products').addEventListener('submit',function(event){
+         
+      {{!-- document.getElementById('products').addEventListener('submit',function(event){
         event.preventDefault();//Prevent  form submission
         var productId = document.getElementById('product_id').value;
          var productName= document.getElementById('product_name').value;
         var quantity = document.getElementById('quantity').value;
-
+         var productOrder = [];
         //create a object with form field values
-        var productsOrder={
+        var newOrder={
             product_id: productId,
             product_name: productName,
             quantity : quantity,
 
         };
-        
+
+        productOrder.push(newOrder);
+        var allProducts = JSON.stringify(productOrder);
+        console.log(allProducts);
         alert(productId + productName + quantity );
         alert( productsOrder.product_name );
          window.location.href = ('/adding_orders')
-      })
+          displayArray();
+      }); --}}
+
+    
+     
       function cancelRow(row) {
          row.remove();
          window.location.href = ('/adding_orders')

@@ -28,4 +28,22 @@ exports.seacrhProduct= (req,res) =>{
             }
             
         });
-    }
+    };
+
+exports.addOrder=(req,res)=>{
+    const productId = req.body.product_id;
+    const productName = req.body.product_name;
+    const quantity = req.body.quantity;
+
+    var newOrder={
+        product_id: productId,
+        product_name: productName,
+        quantity : quantity, 
+    };
+    productOrder.push(newOrder);
+    res.render('admin/order_add',
+    {
+        Orders: productOrder,
+    });
+
+}

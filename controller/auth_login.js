@@ -1,4 +1,6 @@
+const encrypt = require('bcrypt');
 const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
 const db = mysql.createConnection(
     {
         host:  process.env.DATABASE_HOST,
@@ -64,6 +66,47 @@ const db = mysql.createConnection(
                             res.render('admin/home',
                                 {
                                     user:result[0]
+                                });
+                        }
+                });
+    }
+
+    //customer_login
+    exports.customer_login = (req,res)=> {
+        const {email, password} = req.body;
+        if(email == "" || password == "")
+            {
+                res.render('customer/customer_login',
+                    {
+                        message:'Fields are empty, Please try again!',
+                        color:"alert-danger"
+                    });
+            }
+        db.query('SELECT * FROM customers WHERE email = ?',email,
+            (err,result)=>
+                {
+                    if(!result[0])
+                        {
+                            res.render('customer/customer_login',
+                                {
+                                    message:'Invalid credentials, Please try again!',
+                                    color:"alert-danger"
+                                });
+                        }
+                    else if(result[0].password != password)
+                        {
+                            res.render('customer/customer_login',
+                                {
+                                    message:'Invalid credentials, Please try again!',
+                                    color:"alert-danger"
+                                });
+                        }
+                    else
+                        {
+                            res.render('customer/home',
+                                {
+                                    user:result[0],
+                                    display:"none"
                                 });
                         }
                 });

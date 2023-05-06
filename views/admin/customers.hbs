@@ -127,7 +127,8 @@
                         <ul class="nav navbar-nav ml-auto"> 
                             <li class="nav-item active">
                                 <a href="#" class="nav-link">
-                                  <p>Hi <span>{{user.main_admin_firstname}}</span></p>
+                                  <input type="hidden" name="store_id" id="store_id" value="{{user.store_id}}">
+                                  <p>Hi <span name="store_name" id="store_name">{{user.main_admin_firstname}}</span></p>
                                 </a>
                             </li>
                             <li class="nav-item active">

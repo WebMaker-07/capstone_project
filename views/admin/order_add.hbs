@@ -180,22 +180,23 @@
                              <tbody>
                                 {{#each data}}
                                 <tr>
-                                <td id="product_id">{{this.product_id}}</td>
-                                <td  id="product_name">{{this.product_name}}</td>
-                                <td id="details">{{this.product_details}}</td>
-                                 <form action="" method="post" class="w-50">
+                                <td>{{this.product_id}}</td>
+                                <td>{{this.product_name}}</td>
+                                <td>{{this.product_details}}</td>
+                                 <form id="products" method="post" class="w-50">
                                     <td>
-                                        <input type="hidden" name="product_id" value="{{this.product_id}}">
+                                        <input type="text" name="product_name" id="product_name" value="{{this.product_name}}">
+                                        <input type="text" name="product_id" id="product_id" value="{{this.product_id}}">
                                         <input type="number" class="w-100" name="quantity" id="quantity">
                                     </td>
                                 <td>
-                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm w-100">
+                                    <button type="submit" id="add" class="btn btn-outline-success btn-sm w-100">
                                      <i class="bi bi-plus-square-fill"></i> Add
                                </form>
                                  
                                     
                                     </button>
-                                     <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
+                                     <button type="button"  onclick="cancelRow(this.parentNode.parentNode)"
                                      class="btn btn-outline-danger btn-sm mt-2">
                                         <i class="bi bi-plus-square-fill"></i> Cancel
                                     
@@ -232,24 +233,33 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+           
+    </script> 
+    <script>
         
+      document.getElementById('products').addEventListener('submit',function(event){
+        event.preventDefault();//Prevent  form submission
+        var productId = document.getElementById('product_id').value;
+         var productName= document.getElementById('product_name').value;
+        var quantity = document.getElementById('quantity').value;
 
-      document.getElementById('stockProduct').addEventListener('click',function(){
-        let productId = document.getElementById('product_id').innerHTML;
-        let productName = document.getElementById('product_name').innerHTML;
-        let details = document.getElementById('details').innerHTML;
-        let categoryName = document.getElementById('category_name').innerHTML;
-        let quantity = document.getElementById('quantity').value;
+        //create a object with form field values
+        var productsOrder={
+            product_id: productId,
+            product_name: productName,
+            quantity : quantity,
 
-
-        alert(quantity);
+        };
+        
+        alert(productId + productName + quantity );
+        alert( productsOrder.product_name );
+         window.location.href = ('/adding_orders')
       })
       function cancelRow(row) {
          row.remove();
          window.location.href = ('/adding_orders')
-            }       
-           
-    </script> 
+            }      
+    </script>
 
 </body>
 </html>

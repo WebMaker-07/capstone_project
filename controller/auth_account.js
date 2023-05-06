@@ -30,7 +30,7 @@ exports.view_customer= (req,res) =>{
 
 // for adding customer
 exports.add_customer = (req,res)=>{
-    let {first_name, last_name, contact, address} = req.body;
+    let {first_name, last_name, contact, address, email, password} = req.body;
     let store_id = 1;
     function valid(value)
         {
@@ -62,7 +62,9 @@ exports.add_customer = (req,res)=>{
                             first_name: first_name,
                             last_name: last_name,
                             contact: contact,
-                            address: address
+                            address: address,
+                            email:email,
+                            password:password
                         },
                         (err,result)=>
                             {

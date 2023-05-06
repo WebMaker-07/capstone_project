@@ -157,9 +157,9 @@
                       <h3>Process Order</h3>
                     </div>  
                     <div>
-                        <form class="w-75 mb-3" action="/search_products" method="post">
+                        <form class="w-50 mb-3" action="/search_products" method="post">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search" name="search" >
+                                <input class="form-control " type="text" placeholder="Type Product Name" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                                 
                              </div>
@@ -167,38 +167,36 @@
                     </div>
          
                    <div class="table-responsive table-sm ">
-                        <table class="table table-success table-striped table-bordered w-50" id="prodTable" 
-                        style="font-size:15px">
+                        <table class="table table-success table-striped table-bordered table-sm w-50" id="prodTable" 
+                        style="font-size:13px; ">
                              <thead>
                                 <th scope="col">ID</th>
-                               <th scope="col-" style="width: 100px;">Product Name</th>
+                               <th scope="col" class="w-25">Product Name</th>
                                <th scope="col">Description</th>
-                               <th scope="col">Category</th>
-                               <th scope="col">QTY</th>
-                                <th scope="col">Action</th>
+                               <th scope="col" style="width:60px">Quantity</th>
+                                <th scope="col" style="width:50px">Action</th>
                              </thead>
 
                              <tbody>
                                 {{#each data}}
                                 <tr>
                                 <td id="product_id">{{this.product_id}}</td>
-                                <td id="product_name">{{this.product_name}}</td>
+                                <td  id="product_name">{{this.product_name}}</td>
                                 <td id="details">{{this.product_details}}</td>
-                                <td id="category_name">{{this.category_name}}</td>
-                                 <form action="" method="post">
+                                 <form action="" method="post" class="w-50">
                                     <td>
                                         <input type="hidden" name="product_id" value="{{this.product_id}}">
-                                        <input type="number" name="quantity" id="quantity">
+                                        <input type="number" class="w-100" name="quantity" id="quantity">
                                     </td>
                                 <td>
-                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
+                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm w-100">
                                      <i class="bi bi-plus-square-fill"></i> Add
                                </form>
                                  
                                     
                                     </button>
                                      <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
-                                     class="btn btn-outline-danger btn-sm">
+                                     class="btn btn-outline-danger btn-sm mt-2">
                                         <i class="bi bi-plus-square-fill"></i> Cancel
                                     
                                     </button>

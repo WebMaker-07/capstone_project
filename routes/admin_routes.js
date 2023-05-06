@@ -15,6 +15,7 @@ router.get('/register_admin',(request,response)=>{
 
 // routes in admin dashboards
 router.get('/dashboard',(request,response)=>{
+    
     response.render('admin/home');
 })
     // routes for customer function
@@ -66,6 +67,9 @@ router.get('/dashboard',(request,response)=>{
         response.render('customer/customer_login');
     })
     router.get('/store1/register',(request,response)=>{
+        response.render('customer/customer_register');
+    })
+    router.post('/store1/register',(request,response)=>{
         response.render('customer/customer_register');
     })
 

@@ -30,7 +30,7 @@ const db = mysql.createConnection(
     
     exports.addProductList = (req,res)=>{
         const { barcode, product_name, category_id, suggested_price, actual_price, standard_qty, product_details} = req.body;
-        let store_id = 2;
+        let store_id = 1;
         db.query('INSERT INTO products set ?',
         {
             barcode: barcode,

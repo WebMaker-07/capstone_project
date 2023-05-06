@@ -39,11 +39,8 @@ const db = mysql.createConnection(
                 console.log(err);
                 res.status(500).send('An error occurred while updating the category.');
               } else {
-                // console.log(result);
-                // // Change the button text to "Cancel Update"
-                // const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
-                // document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
-                // res.redirect('/admin/product_category');
+                console.log(result);
+
 
                 db.query('SELECT * from products_category',
                 (error,output)=>

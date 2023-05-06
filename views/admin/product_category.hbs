@@ -251,6 +251,11 @@
         document.getElementById('updateBtn').classList.remove('d-none');
     }
 
+        // Change the button text to "Cancel Update"
+            const button = req.body.category_id ? 'updateBtn' : 'submitBtn';
+            document.getElementById(button).innerHTML = 'Cancel Update<i class="bi bi-x-square"></i>';
+            res.redirect('/admin/product_category');
+
             function cancelUpdate() {
         // Reset the form to its original state
         document.getElementById('category_name').value = '';

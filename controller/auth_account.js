@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const encrypt = require('bcrypt');
 const db = mysql.createConnection(
     {
         host:  process.env.DATABASE_HOST,
@@ -43,7 +44,7 @@ exports.add_customer = (req,res)=>{
     last_name = valid(last_name);
     contact = contact.trim();
     address = address.trim();
-    db.query('SELECT * FROM customers where contact = ?',contact,(err,data)=>
+    db.query('SELECT * FROM customers where contact = ?',contact, async (err,data)=>
         {
             if(data!=0)
                 {
@@ -56,6 +57,8 @@ exports.add_customer = (req,res)=>{
                 }
             else
                 {
+                    const hashPassword = await encrypt.hash(password, 8);
+                    console.log(hashPassword);
                     db.query('INSERT INTO customers set ?',
                         {
                             store_id: store_id,
@@ -64,7 +67,7 @@ exports.add_customer = (req,res)=>{
                             contact: contact,
                             address: address,
                             email:email,
-                            password:password
+                            password:hashPassword
                         },
                         (err,result)=>
                             {

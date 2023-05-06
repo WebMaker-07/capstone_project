@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const encrypt = require('bcrypt');
 const db = mysql.createConnection(
     {
         host:  process.env.DATABASE_HOST,
@@ -33,7 +34,7 @@ const db = mysql.createConnection(
         const { first_name, last_name, email, password, contact, address } = req.body;
       
         // Check if email already exists
-        db.query('SELECT * FROM customers WHERE email = ?', [email], (err, result) => {
+        db.query('SELECT * FROM customers WHERE email = ?', [email], async (err, result) => {
           if (err) {
             console.log('Error Message: ' + err);
             res.render('customer/customer_register', {
@@ -59,6 +60,7 @@ const db = mysql.createConnection(
               });
             } else {
               // Insert new customer data into database
+              const hashPassword = await encrypt.hash(password, 8);
               db.query('INSERT INTO customers (first_name, last_name, email, password, contact, address, store_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
                   [first_name, last_name, email, password, contact, address, 1], (err, result) => {
                   if (err) {

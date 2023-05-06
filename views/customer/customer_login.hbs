@@ -13,7 +13,14 @@
         <div class="pt-5">
             <h1 class="text-center h1"> Store 1 Login</h1>
         </div>
-        <form action="" method="post" class="p-5">
+        <form action="/auth/customer_login" method="post" class="p-5">
+            <div class="">
+                    {{#if message}}
+                        <h5 class="alert {{color}}">
+                            {{message}}
+                        </h5>
+                    {{/if}}
+            </div>
            <div class="mb-3">
                 <label for="" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control">
@@ -25,7 +32,7 @@
             </div>
             
             <div class="mb-3 ">
-                <a href="/store1/index" class="btn btn-primary w-100">Login</a>
+                <button type="submit"  class="btn btn-primary w-100">Login</button>
             </div>
            <div class="text-center">
              <p>Don't have an Account?<a href="/store1/register">Register</a></p>

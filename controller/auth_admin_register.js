@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+const encrypt = require('bcrypt');
 const db = mysql.createConnection(
     {
         host:  process.env.DATABASE_HOST,
@@ -47,7 +48,7 @@ const db = mysql.createConnection(
                 });
             } else {
                 // Check if username already exists
-                db.query('SELECT * FROM stores WHERE user_name = ?', [user_name], (err, result) => {
+                db.query('SELECT * FROM stores WHERE user_name = ?', [user_name], async (err, result) => {
                     if (err) {
                         console.log('Error Message: ' + err);
                         res.render('register_admin', {
@@ -72,12 +73,13 @@ const db = mysql.createConnection(
                                 color: 'alert-danger'
                             });
                         } else {
+                            const hashPassword = await encrypt.hash(user_password, 8);
                             db.query('INSERT INTO stores SET ?', {
                                 store_name: store_name,
                                 user_name: user_name,
                                 main_admin_firstname: main_admin_firstname,
                                 main_admin_lastname: main_admin_lastname,
-                                user_password: user_password,
+                                user_password: hashPassword,
                                 user_email: user_email
                             }, (err,result)=>{
                                 if(err) {

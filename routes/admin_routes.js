@@ -82,6 +82,7 @@ router.get('/dashboard',(request,response)=>{
         response.render('admin/order_add');
     });
     router.post('/search_products', order.seacrhProduct);
+    router.post('/addOrder', order.addOrder);
 
 
 

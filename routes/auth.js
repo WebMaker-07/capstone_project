@@ -56,4 +56,7 @@ router.get('/login_admin',login.viewuser);
 
 //login store_account
 router.post('/store_login',login.store_login);
+
+//customer_login
+router.post('/customer_login',login.customer_login);
 module.exports = router;

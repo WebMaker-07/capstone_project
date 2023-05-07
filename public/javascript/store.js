@@ -1,4 +1,4 @@
-window.addEventListener('load', function()
-    {
-        this.alert('hello');
-    });
+// window.addEventListener('load', function()
+//     {
+//         this.alert('hello');
+//     });

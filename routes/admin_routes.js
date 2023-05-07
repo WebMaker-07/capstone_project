@@ -2,6 +2,7 @@ let express = require('express');
 const router = express.Router();
 const product = require('../controller/auth_product');
 const order = require('../controller/auth_order');
+const register = require('../controller/auth_admin_register');
 
 router.get('/',(request,response)=>{
     response.render('index');
@@ -85,7 +86,8 @@ router.get('/dashboard',(request,response)=>{
     router.post('/addOrder', order.addOrder);
 
 
-
+    // Adding main Admin
+    router.post('/register_admin',register.adduser);
 
 
 module.exports = router;

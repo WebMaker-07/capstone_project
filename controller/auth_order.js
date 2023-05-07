@@ -70,3 +70,98 @@ exports.addOrder=(req,res)=>{
         });
 
 }
+
+exports.removeProducts =(req,res)=>{
+    const onProcess_id = req.body.on_process_id;
+
+    db.query(`DELETE  FROM on_process_order WHERE on_process_id = ? `,[onProcess_id ],
+        (error,result)=>
+        {
+            console.log(result)
+            if(error)
+            {
+                console.log("Error Message : " + error);
+            }
+            else
+            {
+              db.query(`SELECT * FROM on_process_order`, (error,result)=>{
+                if(error)
+                   {
+                    console.log("Error Message : " + error);
+                   }
+                   else{
+                  
+                        res.render('admin/order_on_process',
+                        {
+                            data: result,
+                            message: "Product Remove Successfully",
+                            color: "alert-danger"
+                        });
+                   
+                   }
+
+                })
+            }
+               
+        
+        });
+
+}
+
+exports.onProcessProducts =(req,res)=>{
+    db.query(`SELECT * FROM on_process_order `,
+    (error,result)=>
+    {
+        console.log(result)
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            let totalPrice = 0;
+            for (const row of result) {
+              totalPrice += row.total_price;
+            }
+            console.log(totalPrice);
+            res.render('admin/order_on_process',
+            {
+                data: result,
+                totalPrice: totalPrice,
+            });
+        }
+        
+    });
+}
+
+exports.transactOrder =(req,res)=>{
+    // const customer_name = red.body.customer_name;
+    // const payment = red.body.payment;
+    // const payment_method = red.body.payment_method;
+
+    const transaction = `INSERT INTO orders_details SELECT * FROM on_process_order;`
+   
+    db.query(transaction,
+    (error,result)=>
+    {
+        console.log(result)
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            let totalPrice = 0;
+            for (const row of result) {
+              totalPrice += row.total_price;
+            }
+            console.log(totalPrice);
+            res.render('admin/order-list',
+            {
+                data: result,
+               
+            });
+        }
+        
+    });
+}

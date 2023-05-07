@@ -84,10 +84,18 @@ router.get('/dashboard',(request,response)=>{
     });
     router.post('/search_products', order.seacrhProduct);
     router.post('/addOrder', order.addOrder);
+    router.get('/on_process_order', order.onProcessProducts);
+    router.post('/removeProduct', order.removeProducts);
+    router.post('/transact_order', order.transactOrder);
+
 
 
     // Adding main Admin
     router.post('/register_admin',register.adduser);
 
+    //SETTING ROUTE
+    router.get('/settings',(request,response)=>{
+        response.render('admin/settings');
+    });
 
 module.exports = router;

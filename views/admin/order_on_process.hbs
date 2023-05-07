@@ -100,7 +100,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/settings">
                         <i class="fas fa-user-cog"></i>
                         Setting
                     </a>
@@ -169,7 +169,7 @@
                         </h4>
                     {{/if}}
                     <div class="table-responsive ">
-                        <table class="table table-success table-striped table-bordered">
+                        <table class="table table-success table-striped ">
                               <thead>
                                   <th scope="col">Product ID</th>
                                   <th scope="col">Product Name</th>
@@ -178,21 +178,65 @@
                                   <th scope="col">Total Amount</th>
                                   <th scope="col">Action</th>
                                </thead>
-                              <tbody>
-                                  <tr>
-                                     <td>S05052023-0001</td>
-                                     <td>Customer 1</td>
-                                     <td>&#8369; 123.00</td>
-                                     <td>May 5, 2023</td>
-                                     <td>admin</td>
-                                     <td>
-                                       <a href="" class="btn btn-sm btn-primary">View</a>
-                                     </td>
-                                  </tr>                  
+                             <tbody>
+                                {{#each data}}
+                                <tr>
+                                <td>{{this.product_id}}</td>
+                                <td>{{this.product_name}}</td>
+                                <td>{{this.product_price}}</td>
+                                <td>{{this.quantity}}</td>
+                                <td>{{this.total_price}}</td>
+                                 <form  action="/removeProduct" method="post" class="w-50">
+                                    <td>
+                                        <input type="hidden" name="on_process_id"  value="{{this.on_process_id}}">
+                                    <button type="submit" id="add" class="btn btn-outline-danger btn-sm w-100">
+                                     <i class="bi bi-trash-fill"></i> Remove
+                                    </td>
+                             
+                       
+                               </form>  
+                                
+                                </tr>
+                            {{/each}}
                               </tbody>
+                              <tfoot class="table-info">
+                                <tr>
+                                    <td colspan="4" class="text-center"><h5>Grand Total</h5> </td>
+                                    <td colspan="2"><h4>{{totalPrice}}</h4></td>
+                                </tr>
+                               
+                              </tfoot>
+                           
                         </table>
+                        
                     </div>
-                    
+                     <div>
+                        <h5>Transaction Form</h5>
+                              <form action="/transact_order" method="post">
+                                  {{!-- {{#each data}}
+                                 <input type="text" value="{{this.product_id}}" >
+                             {{/each}} --}}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="">Customer Name</label>
+                                         <input type="text" name="customer_name"  class="form-control">
+                                    </div>
+                                    <div class="col-lg-6">
+                                         <label for="">Payment</label>
+                                       <input type="text" name="customer_payment"  class="form-control">
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <label for="">Payment Method</label>
+                                    <select name="payment_method" class="form-control">
+                                        <option value="cash">Cash</option>
+                                        <option value="unpaid">Utang /Unpaid </option>
+                                    </select>
+                                 </div>
+                               
+                                <button class="btn btn-success">Order</button>
+                              </form>
+                         </div>
                </div>
                 
                 

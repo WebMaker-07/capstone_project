@@ -6,8 +6,8 @@ font-family: 'Pacifico', cursive;
 font-family: 'Tillana', cursive;
 */
 body{
-    background-color: rgb(249, 250, 250);
-    color: rgb(11, 11, 11);
+    background: rgb(0, 0, 0);
+    color: rgb(217, 213, 213);
 }
  h3{
     font-family:'Archivo Narrow', sans-serif;
@@ -41,7 +41,8 @@ span {
     padding-right: 100px;
 }
 .row .tagline a{
-   background: rgba(114, 255, 171, 0.5);
+   background: rgba(255, 213, 114);
+   box-shadow: 2px 2px 5px 5px #d3ad55;
    font-size: 20px;
    color:rgb(10, 10, 10);
    font-weight: 500;
@@ -50,6 +51,12 @@ span {
     color: rgb(0, 0, 0);
     font-size: 20px;
     background-color:rgb(156, 158, 160);
+ }
+ .row .tagline a:hover {
+    background: rgba(255, 213, 114);
+    box-shadow: 2px 2px 5px 5px #d3ad55;
+    font-size: 25px;
+
     
 
  }
@@ -62,12 +69,21 @@ i{
 }
 .wecando{
     border-radius: 10px;
-    background: rgba(114, 255, 171, 0.5);
-    box-shadow: 2px 5px 5px 5px #51ddae;
+    background: rgba(255, 213, 114);
+    box-shadow: 2px 2px 5px 5px #d3ad55;
+    color: black;
+
 
 
 }
 footer p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+footer h4{
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer p a i{ 
     font-size: 20px;
 }
 .container .row .services p{
@@ -78,8 +94,9 @@ footer p {
 }
 .container .row .services {
     border-radius: 10px;
-    background: rgba(114, 255, 171, 0.5);
-    box-shadow: 2px 0px 5px 5px #51ddae;
+    background: rgba(255, 213, 114);
+    box-shadow: 2px 2px 5px 5px #d3ad55;
+    color: black;
     /* padding:15; */
     margin-left: 20px;
 }

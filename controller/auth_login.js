@@ -43,7 +43,7 @@ const db = mysql.createConnection(
                     });
             }
         db.query('SELECT * FROM stores WHERE user_email = ?',user_email,
-            (err,result)=>
+            async (err,result)=>
                 {
                     if(!result[0])
                         {
@@ -53,7 +53,7 @@ const db = mysql.createConnection(
                                     color:"alert-danger"
                                 });
                         }
-                    else if(result[0].user_password != user_password)
+                    else if (!(await encrypt.compare(user_password,result[0].user_password)))
                         {
                             res.render('login_admin',
                                 {
@@ -83,7 +83,7 @@ const db = mysql.createConnection(
                     });
             }
         db.query('SELECT * FROM customers WHERE email = ?',email,
-            (err,result)=>
+            async (err,result)=>
                 {
                     if(!result[0])
                         {
@@ -93,7 +93,7 @@ const db = mysql.createConnection(
                                     color:"alert-danger"
                                 });
                         }
-                    else if(result[0].password != password)
+                    else if (!(await encrypt.compare(password,result[0].password)))
                         {
                             res.render('customer/customer_login',
                                 {

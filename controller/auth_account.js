@@ -58,7 +58,6 @@ exports.add_customer = (req,res)=>{
             else
                 {
                     const hashPassword = await encrypt.hash(password, 8);
-                    console.log(hashPassword);
                     db.query('INSERT INTO customers set ?',
                         {
                             store_id: store_id,

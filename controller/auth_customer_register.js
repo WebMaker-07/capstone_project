@@ -61,8 +61,15 @@ const db = mysql.createConnection(
             } else {
               // Insert new customer data into database
               const hashPassword = await encrypt.hash(password, 8);
-              db.query('INSERT INTO customers (first_name, last_name, email, password, contact, address, store_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                  [first_name, last_name, email, password, contact, address, 1], (err, result) => {
+              db.query('INSERT INTO customers set ?',
+                  {
+                    first_name : first_name, 
+                    last_name : last_name, 
+                    email: email, 
+                    password: hashPassword, 
+                    contact: contact, 
+                    address: address, 
+                    store_id: 1}, (err, result) => {
                   if (err) {
                     console.log('Error Message: ' + err);
                     res.render('customer/customer_register', {

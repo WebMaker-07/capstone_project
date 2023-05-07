@@ -71,33 +71,72 @@ const db = mysql.createConnection(
     // add or update category
   exports.addProductcat = (req, res) => {
       const { category_name } = req.body;
-      db.query(
-        'INSERT INTO products_category SET ?',
+      db.query('SELECT * FROM products_category WHERE category_name = ?', category_name, (err,result)=>
         {
-          category_name: category_name,
-          store_id: 1 // add default value for store_id
-        },
-        (err, result) => {
-          if (err) {
-            console.log('Error Message: ' + err);
-            res.status(500).send('An error occurred while adding the category.');
-          } else {
-            db.query('SELECT * FROM products_category', (err, data) => {
-              if (err) {
-                console.log('Error Message: ' + err);
-                res.status(500).send('An error occurred while retrieving the list of categories.');
-              } else {
-                res.render('admin/product_category', {
-                  data: data,
-                  message: 'Product added successfully!',
-                  color: 'alert-success'
-                });
+          if(err)
+            {
+              console.log('Error message : '+err);
+            }
+          else if(result!=0)
+            {
+              res.render('admin/product_category', {
+                data: result,
+                message: 'Product category existed!',
+                color: 'alert-warning'
+              });
+            }
+          else if(result==0)
+            {
+              if(category_name == "")
+                {
+                    db.query('SELECT * FROM products_category',(err,output)=>{
+                    if(err)
+                      {
+                        console.log('Error message: '+ err)
+                      }
+                    else
+                      {
+                        res.render('admin/product_category', {
+                          data: output,
+                          message: 'Field must not be empty!',
+                          color: 'alert-warning'
+                        });
+                      }
+                  });
+                }
+              else
+                {
+                db.query(
+                  'INSERT INTO products_category SET ?',
+                  {
+                    category_name: category_name,
+                    store_id: 1 // add default value for store_id
+                  },
+                  (err, result) => {
+                    if (err) {
+                      console.log('Error Message: ' + err);
+                      res.status(500).send('An error occurred while adding the category.');
+                    } else {
+                      db.query('SELECT * FROM products_category', (err, data) => {
+                        if (err) {
+                          console.log('Error Message: ' + err);
+                          res.status(500).send('An error occurred while retrieving the list of categories.');
+                        } else {
+                          res.render('admin/product_category', {
+                            data: data,
+                            message: 'Product added successfully!',
+                            color: 'alert-success'
+                          });
+                        }
+                      });
+                    }
+                  }
+                );
               }
-            });
-          }
-        }
-      );
-    };
+            }
+        });
+    }
+    
             
 
     

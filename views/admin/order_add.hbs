@@ -159,7 +159,7 @@
                     <div>
                         <form class="w-75 mb-3" action="/search_products" method="post">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search" name="search" >
+                                <input class="form-control " type="text" placeholder="Type Product Name" name="search" >
                                  <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                                 
                              </div>
@@ -167,38 +167,37 @@
                     </div>
          
                    <div class="table-responsive table-sm ">
-                        <table class="table table-success table-striped table-bordered w-50" id="prodTable" 
-                        style="font-size:15px">
+                        <table class="table table-success table-striped table-bordered table-sm " id="prodTable" 
+                       >
                              <thead>
                                 <th scope="col">ID</th>
-                               <th scope="col-" style="width: 100px;">Product Name</th>
+                               <th scope="col" class="w-25">Product Name</th>
                                <th scope="col">Description</th>
-                               <th scope="col">Category</th>
-                               <th scope="col">QTY</th>
-                                <th scope="col">Action</th>
+                               <th scope="col" style="width:60px">Quantity</th>
+                                <th scope="col" style="width:50px">Action</th>
                              </thead>
 
                              <tbody>
                                 {{#each data}}
                                 <tr>
-                                <td id="product_id">{{this.product_id}}</td>
-                                <td id="product_name">{{this.product_name}}</td>
-                                <td id="details">{{this.product_details}}</td>
-                                <td id="category_name">{{this.category_name}}</td>
-                                 <form action="" method="post">
+                                <td>{{this.product_id}}</td>
+                                <td>{{this.product_name}}</td>
+                                <td>{{this.product_details}}</td>
+                                 <form id="products" action="/addOrder" method="post" class="w-50">
                                     <td>
-                                        <input type="hidden" name="product_id" value="{{this.product_id}}">
-                                        <input type="number" name="quantity" id="quantity">
+                                        <input type="hidden" name="product_name" id="product_name" value="{{this.product_name}}">
+                                        <input type="hidden" name="product_id" id="product_id" value="{{this.product_id}}">
+                                        <input type="number" required class="w-100" name="quantity" id="quantity">
                                     </td>
                                 <td>
-                                    <button type="submit" id="stockProduct"class="btn btn-outline-success btn-sm">
+                                    <button type="submit" id="add" class="btn btn-outline-success btn-sm w-100">
                                      <i class="bi bi-plus-square-fill"></i> Add
                                </form>
                                  
                                     
                                     </button>
-                                     <button type="button" onclick="cancelRow(this.parentNode.parentNode)"
-                                     class="btn btn-outline-danger btn-sm">
+                                     <button type="button"  onclick="cancelRow(this.parentNode.parentNode)"
+                                     class="btn btn-outline-danger btn-sm mt-2">
                                         <i class="bi bi-plus-square-fill"></i> Cancel
                                     
                                     </button>
@@ -208,7 +207,7 @@
                             {{/each}}
                               </tbody>
                           </table>
-
+                       
                     </div>
                  
                      
@@ -234,24 +233,40 @@
                 $('#sidebar').toggleClass('active');
             });
         });
-        
+           
+    </script> 
+    <script>
+         
+      {{!-- document.getElementById('products').addEventListener('submit',function(event){
+        event.preventDefault();//Prevent  form submission
+        var productId = document.getElementById('product_id').value;
+         var productName= document.getElementById('product_name').value;
+        var quantity = document.getElementById('quantity').value;
+         var productOrder = [];
+        //create a object with form field values
+        var newOrder={
+            product_id: productId,
+            product_name: productName,
+            quantity : quantity,
 
-      document.getElementById('stockProduct').addEventListener('click',function(){
-        let productId = document.getElementById('product_id').innerHTML;
-        let productName = document.getElementById('product_name').innerHTML;
-        let details = document.getElementById('details').innerHTML;
-        let categoryName = document.getElementById('category_name').innerHTML;
-        let quantity = document.getElementById('quantity').value;
+        };
 
+        productOrder.push(newOrder);
+        var allProducts = JSON.stringify(productOrder);
+        console.log(allProducts);
+        alert(productId + productName + quantity );
+        alert( productsOrder.product_name );
+         window.location.href = ('/adding_orders')
+          displayArray();
+      }); --}}
 
-        alert(quantity);
-      })
+    
+     
       function cancelRow(row) {
          row.remove();
          window.location.href = ('/adding_orders')
-            }       
-           
-    </script> 
+            }      
+    </script>
 
 </body>
 </html>

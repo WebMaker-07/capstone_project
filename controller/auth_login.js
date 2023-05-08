@@ -111,3 +111,8 @@ const db = mysql.createConnection(
                         }
                 });
     }
+
+    //logout
+    exports.logout = (req,res)=>{
+        res.render('login_admin');
+    }

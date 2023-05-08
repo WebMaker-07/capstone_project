@@ -3,6 +3,7 @@ const router = express.Router();
 const product = require('../controller/auth_product');
 const order = require('../controller/auth_order');
 const register = require('../controller/auth_admin_register');
+const product_list = require('../controller/auth_product_list');
 
 router.get('/',(request,response)=>{
     response.render('index');
@@ -35,9 +36,7 @@ router.get('/dashboard',(request,response)=>{
     router.get('/product-list',(request,response)=>{
         response.render('admin/product_list');
     })
-    router.get('/product_add',(request,response)=>{
-        response.render('admin/product_add');
-    })
+    router.get('/product_add', product_list.viewCategory);
     // router.get('/product_update',(request,response)=>{
     //     response.render('admin/product_update');
     // })

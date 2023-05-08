@@ -63,11 +63,25 @@ exports.processStock= (req,res) =>{
         }
         else
         {
-            res.render('admin/stock_in',
+            db.query('SELECT * FROM stocks_in LEFT JOIN products ON products.product_id = stocks_in.product_id',
+            (error,result)=>
             {
-                data: result,
-                message: "Sucessfully Add Stocks"
+                console.log(result)
+                if(error)
+                {
+                    console.log("Error Message : " + error);
+                }
+                else
+                {
+                    res.render('admin/stock_in',
+                    {
+                        data: result,
+                        message: "Sucessfully Add Stocks"
+                    });
+                }
+                
             });
+          
         }
         
     });

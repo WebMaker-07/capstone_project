@@ -213,17 +213,26 @@
                      <div>
                         <h5>Transaction Form</h5>
                               <form action="/transact_order" method="post">
-                                  {{!-- {{#each data}}
-                                 <input type="text" value="{{this.product_id}}" >
-                             {{/each}} --}}
+                                  {{#each data}}
+                                 <input type="number" name="product_id" value="{{this.product_id}}" >
+                                 <input type="number" name="product_price" value="{{this.product_price}}" >
+                                 <input type="number" name="total_price" value="{{this.total_price}}" >
+                                 <input type="number" name="quantity" value="{{this.quantity}}" >
+                                 
+                             {{/each}}
+                                    <input type="text" name="grand_total" value="{{totalPrice}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="">Customer Name</label>
-                                         <input type="text" name="customer_name"  class="form-control">
+                                         <select name="customer_id" id="" class="form-control" >
+                                            {{#each customers}}
+                                            <option value="{{this.customer_id}}">{{this.first_name}} {{this.last_name}}</option>                        
+                                            {{/each}}
+                                        </select>
                                     </div>
                                     <div class="col-lg-6">
                                          <label for="">Payment</label>
-                                       <input type="text" name="customer_payment"  class="form-control">
+                                       <input type="number" name="customer_payment"  class="form-control">
                                     </div>
                                  </div>
                                  <div>

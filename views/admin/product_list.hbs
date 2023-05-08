@@ -168,10 +168,11 @@
                         </h4>
                     {{/if}}
                     <div class="table-responsive ">
-                        <table class="table table-success table-striped table-bordered  ">
+                        <table class="table table-success table-striped table-bordered" style="font-size: 15px;">
                                                 <thead>
                                                     <th style="width:13%">Product ID</th>
                                                     <th scope="col" style="width:20%">Product Name</th>
+                                                     <th scope="col" style="width:20%">Description</th>
                                                     <th scope="col" style="width:20%">Category</th>
                                                     <th scope="col" style="width:15%"> Buying Price</th>
                                                     <th scope="col" style="width:19%"> Suggested Price</th>
@@ -183,6 +184,7 @@
                                                         <tr>
                                                         <td>{{this.product_id}}</td>
                                                         <td>{{this.product_name}}</td>
+                                                        <td>{{this.product_details}}</td>
                                                         <td>{{this.category_name}}</td>
                                                         <td>{{this.actual_price}}</td>
                                                          <td>{{this.suggested_price}}</td>

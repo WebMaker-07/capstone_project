@@ -83,7 +83,7 @@ const db = mysql.createConnection(
           if (err) {
             console.log("Error Message: " + err);
           } else {
-            db.query('SELECT * FROM products', (err, delData) => {
+            db.query('SELECT * FROM products p JOIN products_category pc ON p.category_id = pc.category_id', (err, delData) => {
               if (err) {
                 console.log('Error Message: ' + err);
               } else {
@@ -107,9 +107,20 @@ const db = mysql.createConnection(
                         console.log('Error message: ' + err);
                     }
                 else
+                    db.query('SELECT * FROM products_category', (err,result1)=>
                     {
-                        res.render('admin/product_update',{data:result[0]});
-                    }
+                        if(err)
+                            {
+                                console.log('Error message: ' + err);
+                            }
+                        else
+                            {
+                                res.render('admin/product_update',{
+                                    data:result[0],
+                                    category: result1
+                                });
+                            }
+                    })
             })
     }
 
@@ -125,7 +136,7 @@ const db = mysql.createConnection(
                         }
                     else
                         {
-                            db.query('SELECT * FROM products',(err,output)=>
+                            db.query('SELECT * FROM products p JOIN products_category pc ON p.category_id = pc.category_id',(err,output)=>
                                 {
                                     if(err)
                                         {
@@ -165,4 +176,23 @@ const db = mysql.createConnection(
                         });
                 }
             })
+    }
+
+    exports.viewCategory = (req,res) =>{
+        db.query('SELECT * FROM products_category',
+        (error,result)=>
+        {
+            if(error)
+            {
+                console.log("Error Message : " + error);
+            }
+            else
+            {
+                res.render('admin/product_add',
+                {
+                    data: result,
+                });
+            }
+            
+        });
     }

@@ -119,15 +119,30 @@ exports.onProcessProducts =(req,res)=>{
         }
         else
         {
-            let totalPrice = 0;
-            for (const row of result) {
-              totalPrice += row.total_price;
-            }
-            console.log(totalPrice);
-            res.render('admin/order_on_process',
+            
+            db.query(`SELECT * FROM customers`,
+            (error,output)=>
             {
-                data: result,
-                totalPrice: totalPrice,
+                console.log(output)
+                if(error)
+                {
+                    console.log("Error Message : " + error);
+                }
+                else
+                {
+                    let totalPrice = 0;
+                    for (const row of result) {
+                    totalPrice += row.total_price;
+                    }
+                    console.log(totalPrice);
+                    res.render('admin/order_on_process',
+                    {
+                        data: result,
+                        totalPrice: totalPrice,
+                        customers: output
+                    });
+                }
+                
             });
         }
         
@@ -135,32 +150,111 @@ exports.onProcessProducts =(req,res)=>{
 }
 
 exports.transactOrder =(req,res)=>{
-    // const customer_name = red.body.customer_name;
-    // const payment = red.body.payment;
-    // const payment_method = red.body.payment_method;
+    function generateRandomNumber() {
+        const min = 100000000;
+        const max = 999999999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomString = '';
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          randomString += characters.charAt(randomIndex);
+        }
+        return randomString;
+      }
+      
+      // Usage example
+      const length = 9;
+      const transactionid = generateRandomString(length);
+      // Usage example
+     const order_referenceid = generateRandomNumber();
+     const product_id = req.body.product_id;
+     const quantity = req.body.quantity;
+     const product_price = req.body.product_price;
+     const total_price = req.body.total_price;
+     const grand_total = req.body.grand_total;
 
-    const transaction = `INSERT INTO orders_details SELECT * FROM on_process_order;`
-   
+     const customer_id = req.body.customer_id;
+     const payment = req.body.customer_payment;
+    const payment_method = req.body.payment_method;
+
+    const customer_change = payment- grand_total;
+    const store_id = 1;
+ console.log( transactionid );
+ console.log(customer_id);
+ console.log( product_id);
+ console.log( quantity);
+  console.log( product_price) 
+  console.log(  total_price) 
+   console.log(store_id)
+   console.log(order_referenceid)
+
+    
+    const transaction = `INSERT INTO transactions
+    (transaction_id,
+        customer_id ,
+        store_id, 
+        total_amount,
+        customer_payment, 
+        payment_method, 
+        customer_change  ) VALUES(?,?,?,?,?,?,?);`;
+   const order_details = `INSERT INTO orders_details
+         (transaction_id,
+          customer_id,
+          product_id, 
+          quantity, 
+          product_price,
+          total_price,
+          store_id,
+          order_reference_id) VALUES(?,?,?,?,?,?,?,?);`;
+    const orders = `INSERT INTO orders
+              (order_reference_id , total_amount, customer_id) VALUES(?,?,?);`;
+//    alert(customer_change );
     db.query(transaction,
+        [transactionid,
+          customer_id ,
+          store_id,  
+          grand_total,
+          payment,
+          payment_method,
+          customer_change ],
     (error,result)=>
     {
-        console.log(result)
+        console.log('success1');
         if(error)
         {
             console.log("Error Message : " + error);
         }
         else
         {
-            let totalPrice = 0;
-            for (const row of result) {
-              totalPrice += row.total_price;
-            }
-            console.log(totalPrice);
-            res.render('admin/order-list',
-            {
-                data: result,
-               
-            });
+            db.query(order_details,
+                [
+                  transactionid,
+                  customer_id,
+                    product_id, 
+                    quantity, 
+                    product_price,
+                    total_price,
+                    store_id,
+                    order_referenceid 
+                   ],
+                (error,result1)=>
+                {
+                    console.log(result1)
+                    if(error)
+                    {
+                        console.log("Error Message : " + error);
+                    }
+                    else
+                    {
+                       
+                      console.log('sucess');
+                    }
+                    
+                });
         }
         
     });

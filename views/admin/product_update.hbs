@@ -176,7 +176,11 @@
                        </div>
                        <div class="col">
                          <label for="" class="form-label">Product Category</label>
-                         <input type="text" class="form-control" name="category_id" value="{{data.category_id}}">
+                          <select name="category_id" id="" class="form-control" >
+                             {{#each category}}
+                               <option value="{{this.category_id}}">{{this.category_name}}</option>                        
+                             {{/each}}
+                        </select>
                        </div>
                        <div class="col">
                          <label for="" class="form-label">Product Details</label>

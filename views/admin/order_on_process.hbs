@@ -214,13 +214,13 @@
                         <h5>Transaction Form</h5>
                               <form action="/transact_order" method="post">
                                   {{#each data}}
-                                 <input type="number" name="product_id" value="{{this.product_id}}" >
-                                 <input type="number" name="product_price" value="{{this.product_price}}" >
-                                 <input type="number" name="total_price" value="{{this.total_price}}" >
-                                 <input type="number" name="quantity" value="{{this.quantity}}" >
+                                 <input type="hidden" name="product_id" value="{{this.product_id}}" >
+                                 <input type="hidden" name="product_price" value="{{this.product_price}}" >
+                                 <input type="hidden" name="total_price" value="{{this.total_price}}" >
+                                 <input type="hidden" name="quantity" value="{{this.quantity}}" >
                                  
                              {{/each}}
-                                    <input type="text" name="grand_total" value="{{totalPrice}}">
+                                    <input type="hidden" name="grand_total" value="{{totalPrice}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="">Customer Name</label>

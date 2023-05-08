@@ -170,12 +170,13 @@
                     <div class="table-responsive ">
                         <table class="table table-success table-striped table-bordered" style="font-size: 15px;">
                                                 <thead>
-                                                    <th style="width:13%">Product ID</th>
+                                                    <th style="width:13%">ID</th>
                                                     <th scope="col" style="width:20%">Product Name</th>
                                                      <th scope="col" style="width:20%">Description</th>
                                                     <th scope="col" style="width:20%">Category</th>
                                                     <th scope="col" style="width:15%"> Buying Price</th>
-                                                    <th scope="col" style="width:19%"> Suggested Price</th>
+                                                    <th scope="col" >SRP</th>
+                                                    <th scope="col" style="width:25%"> Stocks</th>
                                                     {{!-- <th scope="col">Date Added</th> --}}
                                                     <th scope="col">Action</th>
                                                 </thead>
@@ -188,6 +189,8 @@
                                                         <td>{{this.category_name}}</td>
                                                         <td>{{this.actual_price}}</td>
                                                          <td>{{this.suggested_price}}</td>
+                                                         <td>{{this.on_hand_stock}}</td>
+
                                                         {{!-- <td>{{this.date_update}}</td> --}}
                                                         <td>
                                                             <a  href="/auth/product_update/{{this.product_id}}" class="btn btn-outline-success btn-sm w-100"><i class="bi bi-pencil-square"></i> Update</a>

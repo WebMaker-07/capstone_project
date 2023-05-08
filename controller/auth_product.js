@@ -63,6 +63,7 @@ exports.processStock= (req,res) =>{
         }
         else
         {
+
             db.query('SELECT * FROM stocks_in LEFT JOIN products ON products.product_id = stocks_in.product_id',
             (error,result)=>
             {
@@ -73,11 +74,24 @@ exports.processStock= (req,res) =>{
                 }
                 else
                 {
-                    res.render('admin/stock_in',
-                    {
-                        data: result,
-                        message: "Sucessfully Add Stocks"
-                    });
+                    
+                    db.query('UPDATE products SET on_hand_stock = on_hand_stock + ? WHERE product_id = ?',
+                        [quantity, product_id],
+                        (err,result1)=>
+                            {
+                                if(err)
+                                    {
+                                        console.log('Error message: ' + err);
+                                    }
+                                else
+                                    {
+                                        res.render('admin/stock_in',
+                                        {
+                                            data: result,
+                                            message: "Sucessfully Add Stocks"
+                                        });
+                                    }
+                            });
                 }
                 
             });
@@ -85,4 +99,56 @@ exports.processStock= (req,res) =>{
         }
         
     });
+}
+
+exports.summary=(req,res)=>{
+    // const totalproducts = 'SELECT COUNT(*) AS totalproducts FROM products';
+    db.query('SELECT COUNT(*) AS totalproducts FROM products',
+    (error,output)=>
+    {
+        // console.log(output)
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            // const totalproducts = output[0].totalproducts;
+            // console.log(totalproducts)
+            // res.render('admin/home',
+            // {
+            //      totalproducts: totalproducts ,
+            //      note: "test"
+
+            // });
+            db.query('SELECT COUNT(*) AS totalcustomer FROM customers',
+            (error,output2)=>
+            {
+                // console.log(output)
+                if(error)
+                {
+                    console.log("Error Message : " + error);
+                }
+                else
+                {
+                    const totalproducts = output[0].totalproducts;
+                    const totalcustomer = output2[0].totalcustomer;
+
+                    console.log(totalproducts)
+                    res.render('admin/home',
+                    {
+                         totalproducts: totalproducts ,
+                         totalcustomer: totalcustomer ,
+                         note: "test"
+        
+                    });
+                }
+                
+            });
+        
+        }
+        
+    });
+
+
 }

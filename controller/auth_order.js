@@ -166,34 +166,21 @@ exports.transactOrder =(req,res)=>{
         return randomString;
       }
       
-      // Usage example
+// for transaction number
       const length = 9;
       const transactionid = generateRandomString(length);
-      // Usage example
+  // for reference number
      const order_referenceid = generateRandomNumber();
-     const product_info = req.body
-    //  const product_id = req.body.product_id;
-    //  const quantity = req.body.quantity;
-    //  const product_price = req.body.product_price;
-    //  const total_price = req.body.total_price;
-     const grand_total = req.body.grand_total;
 
+     const product_info = req.body//data retrieve
+     const grand_total = req.body.grand_total;
      const customer_id = req.body.customer_id;
      const payment = req.body.customer_payment;
     const payment_method = req.body.payment_method;
 
     const customer_change = payment- grand_total;
     const store_id = 1;
- console.log( transactionid );
- console.log(customer_id);
- console.log( product_id);
- console.log( quantity);
-  console.log( product_price) 
-  console.log(  total_price) 
-   console.log(store_id)
-   console.log(order_referenceid)
-
-    
+     console.log( transactionid );
     const transaction = `INSERT INTO transactions
     (transaction_id,
         customer_id ,
@@ -203,8 +190,9 @@ exports.transactOrder =(req,res)=>{
         payment_method, 
         customer_change  ) VALUES(?,?,?,?,?,?,?);`;
         const insertRetrievedQuery =
-         `INSERT INTO orders_details (product_id, quantity,product_price,total_price) 
-         VALUES (?,?,?,?,?,?,)`;
+         `INSERT INTO orders_details (
+            product_id, quantity,product_price,total_price) 
+         VALUES (?,?,?,?)`;
    const order_details = `INSERT INTO orders_details
          (transaction_id,
           customer_id,
@@ -215,7 +203,8 @@ exports.transactOrder =(req,res)=>{
           store_id,
           order_reference_id) VALUES(?,?,?,?,?,?,?,?);`;
     const orders = `INSERT INTO orders
-              (order_reference_id , total_amount, customer_id) VALUES(?,?,?);`;
+              (orders_reference_id , total_amount, customer_id,store_id)
+               VALUES(?,?,?,?);`;
 //    alert(customer_change );
     db.query(transaction,
         [transactionid,
@@ -227,36 +216,139 @@ exports.transactOrder =(req,res)=>{
           customer_change ],
     (error,result)=>
     {
-        console.log('success1');
+        
         if(error)
         {
             console.log("Error Message : " + error);
         }
         else
         {
-            db.query(insertRetrievedQuery,
-                [
-                    product_info.product_id, 
-                    product_info.quantity,
-                    product_info.product_price,
-                    product_info.total_price
-
-                 
-                   ],
-                (error,result1)=>
+            db.query(orders,
+                [order_referenceid , grand_total, customer_id,store_id],
+                (error,result2)=>
                 {
-                    console.log(result1)
+                    
+                    console.log(result2)
                     if(error)
                     {
                         console.log("Error Message : " + error);
                     }
                     else
                     {
-                       
-                      console.log('sucess');
+                     console.log('success1');
+                      console.log('success3')
+                      for (let i = 0; i < product_info.product_id.length; i++) {
+                        const product_id = product_info.product_id[i];
+                        const product_price = product_info.product_price[i];
+                        const quantity = product_info.quantity[i];
+                        const total_price = product_info.total_price[i];
+                        
+                    
+                        // Add more fields as needed
+                    
+                        const insertQuery = `INSERT INTO orders_details ( 
+                            transaction_id,
+                            customer_id,
+                            product_id, 
+                            quantity,
+                            product_price,
+                            total_price,
+                            store_id,
+                            order_reference_id) 
+                         VALUES (?,?,?,?,?,?,?,?)`;
+                        db.query(insertQuery, 
+                            [transactionid,customer_id,
+                            product_id, quantity,
+                            product_price,total_price,
+                            store_id, order_referenceid], (error, result2) => {
+                          if (error) {
+                            console.error('Error inserting data:', error);
+                            // Handle the error as desired
+                          }
+                          else{
+                            console.log("success2");
+                            db.query(`TRUNCATE on_process_order`,
+                            (error,result)=>
+                            {
+                                console.log(result)
+                                if(error)
+                                {
+                                    console.log("Error Message : " + error);
+                                }
+                                else
+                                {
+                                    db.query('SELECT * FROM orders JOIN customers ON customers.customer_id = orders.customer_id',
+                                    (error,result)=>
+                                    {
+                                        if(error)
+                                        {
+                                            console.log("Error Message : " + error);
+                                        }
+                                        else
+                                        {
+                                            // console.log('success 4');
+                                            // res.render('admin/order',
+                                            // {
+                                            //     message:  'Order Succefully Process',
+                                            //     color: 'alert-success',
+                                            //     data: result,
+                                            // });
+                                            db.query('UPDATE products SET on_hand_stock = on_hand_stock - ? WHERE product_id = ?',
+                                                [quantity, product_id],
+                                                (err,result1)=>
+                                             {
+                                                if(err)
+                                                    {
+                                                        console.log('Error message: ' + err);
+                                                    }
+                                                else
+                                                    {
+                                                        console.log('success 4');
+                                                        res.render('admin/order',
+                                                        {
+                                                            message:  'Order Succefully Process',
+                                                            color: 'alert-success',
+                                                            data: result,
+                                                        });
+                                                    }
+                                            });
+                                        }
+                                        
+                                    });
+                                
+
+                                }
+                                   
+                            
+                            });
+                          
+                          }
+                        });
+                      }
                     }
                     
                 });
+           
+        }
+        
+    });
+}
+
+exports.viewOrders = (req,res) =>{
+    db.query('SELECT * FROM orders JOIN customers ON customers.customer_id = orders.customer_id',
+    (error,result)=>
+    {
+        if(error)
+        {
+            console.log("Error Message : " + error);
+        }
+        else
+        {
+            res.render('admin/order',
+            {
+                data: result,
+            });
+            
         }
         
     });

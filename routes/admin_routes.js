@@ -16,10 +16,12 @@ router.get('/register_admin',(request,response)=>{
 })
 
 // routes in admin dashboards
-router.get('/dashboard',(request,response)=>{
+// router.get('/dashboard',(request,response)=>{
     
-    response.render('admin/home');
-})
+//     response.render('admin/home');
+// })
+router.get('/dashboard', product.summary);
+
     // routes for customer function
     router.get('/customers',(request,response)=>{
         response.render('admin/customers');
@@ -75,12 +77,13 @@ router.get('/dashboard',(request,response)=>{
 
     
     //ORDER FUNCTION
-    router.get('/order-list',(request,response)=>{
-        response.render('admin/order');
-    });
+    // router.get('/order-list',(request,response)=>{
+    //     response.render('admin/order');
+    // });
     router.get('/adding_orders',(request,response)=>{
         response.render('admin/order_add');
     });
+    router.get('/order-list', order.viewOrders);
     router.post('/search_products', order.seacrhProduct);
     router.post('/addOrder', order.addOrder);
     router.get('/on_process_order', order.onProcessProducts);

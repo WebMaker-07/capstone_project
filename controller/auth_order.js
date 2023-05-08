@@ -171,10 +171,11 @@ exports.transactOrder =(req,res)=>{
       const transactionid = generateRandomString(length);
       // Usage example
      const order_referenceid = generateRandomNumber();
-     const product_id = req.body.product_id;
-     const quantity = req.body.quantity;
-     const product_price = req.body.product_price;
-     const total_price = req.body.total_price;
+     const product_info = req.body
+    //  const product_id = req.body.product_id;
+    //  const quantity = req.body.quantity;
+    //  const product_price = req.body.product_price;
+    //  const total_price = req.body.total_price;
      const grand_total = req.body.grand_total;
 
      const customer_id = req.body.customer_id;
@@ -201,6 +202,9 @@ exports.transactOrder =(req,res)=>{
         customer_payment, 
         payment_method, 
         customer_change  ) VALUES(?,?,?,?,?,?,?);`;
+        const insertRetrievedQuery =
+         `INSERT INTO orders_details (product_id, quantity,product_price,total_price) 
+         VALUES (?,?,?,?,?,?,)`;
    const order_details = `INSERT INTO orders_details
          (transaction_id,
           customer_id,
@@ -230,16 +234,14 @@ exports.transactOrder =(req,res)=>{
         }
         else
         {
-            db.query(order_details,
+            db.query(insertRetrievedQuery,
                 [
-                  transactionid,
-                  customer_id,
-                    product_id, 
-                    quantity, 
-                    product_price,
-                    total_price,
-                    store_id,
-                    order_referenceid 
+                    product_info.product_id, 
+                    product_info.quantity,
+                    product_info.product_price,
+                    product_info.total_price
+
+                 
                    ],
                 (error,result1)=>
                 {

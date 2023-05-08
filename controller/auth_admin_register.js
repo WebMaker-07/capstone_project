@@ -32,8 +32,19 @@ const db = mysql.createConnection(
 
 
         exports.adduser = (req,res)=>{
-        const { store_name, user_name, main_admin_firstname, main_admin_lastname, user_password, user_email,  } = req.body;
+        let { store_name, user_name, main_admin_firstname, main_admin_lastname, user_password, user_email,  } = req.body;
         // Check if email already exists
+        function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+        store_name = valid(store_name);
+        user_name = valid(user_name);
+        main_admin_firstname = valid(main_admin_firstname);
+        main_admin_lastname = valid(main_admin_lastname);
         db.query('SELECT * FROM stores WHERE user_email = ?', [user_email], (err, result) => {
             if (err) {
                 console.log('Error Message: ' + err);

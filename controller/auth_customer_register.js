@@ -32,6 +32,17 @@ const db = mysql.createConnection(
 
     exports.register_customer = (req, res) => {
         const { first_name, last_name, email, password, contact, address } = req.body;
+        function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+        first_name = valid(first_name);
+        last_name = valid(last_name);
+        contact = contact.trim();
+        address = address.trim();
       
         // Check if email already exists
         db.query('SELECT * FROM customers WHERE email = ?', [email], async (err, result) => {

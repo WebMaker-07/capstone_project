@@ -10,6 +10,7 @@ const product_list = require('../controller/auth_product_list');
 const register = require('../controller/auth_admin_register');
 const login = require('../controller/auth_login');
 const product = require('../controller/auth_product');
+const dashboard = require('../controller/dashboard');
 
 
 //CUSTOMER - REGISTER
@@ -62,4 +63,7 @@ router.post('/store_login',login.store_login);
 
 //customer_login
 router.post('/customer_login',login.customer_login);
+
+//admin_dashboard
+router.get('/dashboard',dashboard.viewDashboard);
 module.exports = router;

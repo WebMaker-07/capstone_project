@@ -32,6 +32,15 @@ const db = mysql.createConnection(
         // update category
   exports.updateCategory = (req, res) => {
           const { category_id, category_name } = req.body;
+          function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+        category_name = valid(category_name);
+
           db.query('UPDATE products_category SET category_name = ? WHERE category_id = ?',
             [category_name, category_id],
             (err, result) => {

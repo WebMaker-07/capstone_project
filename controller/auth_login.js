@@ -63,9 +63,22 @@ const db = mysql.createConnection(
                         }
                     else
                         {
-                            res.render('admin/home',
+                            db.query('SELECT COUNT(*) as count FROM customers',(err,output)=>
                                 {
-                                    user:result[0]
+                                    console.log(output);
+                                    if(err)
+                                        {
+                                            console.log('Error message: '+err)
+                                        }
+                                    else
+                                        {
+                                            
+                                            res.render('admin/home',
+                                            {
+                                                data:output,
+                                                user:result[0],
+                                            });
+                                        }
                                 });
                         }
                 });

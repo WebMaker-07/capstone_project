@@ -29,9 +29,22 @@ const db = mysql.createConnection(
 
     
     exports.addProductList = (req,res)=>{
-        const { barcode, product_name, category_id, suggested_price, actual_price, standard_qty, product_details} = req.body;
+        let { barcode, product_name, category_id, suggested_price, actual_price, standard_qty, product_details} = req.body;
         let store_id = 1;
         // let status = 1;
+        function valid(value)
+        {
+            value = value.replace(/[^a-zA-Z0-9 ]/g, '');
+            value = value.trim();
+            value = value.charAt(0).toUpperCase() + value.slice(1);
+            return value;
+        }
+        product_name = valid(product_name);
+        product_details = valid(product_details);
+        suggested_price = suggested_price.trim();
+        actual_price = actual_price.trim();
+        standard_qty = standard_qty.trim();
+        barcode = barcode.trim();
 
         db.query('INSERT INTO products set ?',
         {
